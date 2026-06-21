@@ -1,0 +1,98 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>excel-template-engine</title><meta name="description" content="Documentation for excel-template-engine"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script><script async src="assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">excel-template-engine</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>excel-template-engine</h1></div><div class="tsd-panel tsd-typography"><h1 id="excel-template-engine" class="tsd-anchor-link">excel-template-engine<a href="#excel-template-engine" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<p><code>excel-template-engine</code> là thư viện TypeScript dùng để sinh file Excel <code>.xlsx</code> từ template Excel thật và dữ liệu JSON.</p>
+<p>Thư viện được thiết kế theo hướng template engine/framework, không phải utility nhỏ lẻ và không phải wrapper của <code>xlsx-template</code>. File <code>xlsx-template-lib.js</code> trong repo chỉ được dùng để tham khảo ý tưởng xử lý Excel phức tạp như clone dòng/cột, merge cell, image và formula.</p>
+<h2 id="mục-tiêu" class="tsd-anchor-link">Mục Tiêu<a href="#mục-tiêu" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Pipeline chính:</p>
+<pre><code class="text">Template Excel -&gt; quét workbook -&gt; Lexer -&gt; Parser -&gt; AST -&gt; RenderPlan -&gt; ExcelJS Renderer -&gt; file XLSX
+</code><button type="button">Copy</button></pre>
+
+<p>Các tính năng hướng tới:</p>
+<ul>
+<li>Placeholder: <code>{{teacher.name}}</code></li>
+<li>Loop theo dòng: <code>{{#each students}}...{{/each}}</code></li>
+<li>Loop theo cột: <code>{{#each-col subjects}}...{{/each-col}}</code></li>
+<li>Clone block: <code>{{#block contracts}}...{{/block}}</code></li>
+<li>Điều kiện: <code>{{#if hasSignature}}...{{/if}}</code></li>
+<li>Helper: <code>{{sum(scores)}}</code></li>
+<li>Image: <code>{{image avatar}}</code></li>
+<li>Nested loop</li>
+<li>Multi sheet</li>
+<li>Clone style, merge cell, formula và kích thước dòng/cột</li>
+</ul>
+<h2 id="cài-đặt-phát-triển" class="tsd-anchor-link">Cài Đặt Phát Triển<a href="#cài-đặt-phát-triển" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Yêu cầu:</p>
+<ul>
+<li>Node.js từ <code>18.18</code> trở lên</li>
+<li>npm từ <code>9</code> trở lên</li>
+</ul>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="biên-dịch-thành-thư-viện" class="tsd-anchor-link">Biên Dịch Thành Thư Viện<a href="#biên-dịch-thành-thư-viện" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Biên dịch TypeScript ra thư mục <code>dist</code>:</p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">build</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Kiểm tra type mà không sinh file:</p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">typecheck</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Chạy test:</p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">test</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Kiểm tra nhanh trước khi publish:</p>
+<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">clean</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">run</span><span class="hl-1"> </span><span class="hl-2">build</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">test</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">pack</span><span class="hl-1"> </span><span class="hl-3">--dry-run</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Sau khi build, package sẽ expose entrypoint:</p>
+<pre><code class="ts"><span class="hl-4">import</span><span class="hl-1"> { </span><span class="hl-5">ExcelTemplateEngine</span><span class="hl-1"> } </span><span class="hl-4">from</span><span class="hl-1"> </span><span class="hl-2">&#39;excel-template-engine&#39;</span><span class="hl-1">;</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="cách-sử-dụng" class="tsd-anchor-link">Cách Sử Dụng<a href="#cách-sử-dụng" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Template Excel có thể chứa nội dung như sau trong cell:</p>
+<pre><code class="text">{{teacher.name}}
+</code><button type="button">Copy</button></pre>
+
+<p>Dữ liệu JSON:</p>
+<pre><code class="json"><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-6">&quot;teacher&quot;</span><span class="hl-1">: {</span><br/><span class="hl-1">    </span><span class="hl-6">&quot;name&quot;</span><span class="hl-1">: </span><span class="hl-2">&quot;Nguyễn Văn A&quot;</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Code sử dụng:</p>
+<pre><code class="ts"><span class="hl-4">import</span><span class="hl-1"> { </span><span class="hl-5">writeFile</span><span class="hl-1"> } </span><span class="hl-4">from</span><span class="hl-1"> </span><span class="hl-2">&#39;node:fs/promises&#39;</span><span class="hl-1">;</span><br/><span class="hl-4">import</span><span class="hl-1"> { </span><span class="hl-5">ExcelTemplateEngine</span><span class="hl-1"> } </span><span class="hl-4">from</span><span class="hl-1"> </span><span class="hl-2">&#39;excel-template-engine&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-7">engine</span><span class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-0">ExcelTemplateEngine</span><span class="hl-1">();</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-7">result</span><span class="hl-1"> = </span><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-5">engine</span><span class="hl-1">.</span><span class="hl-0">render</span><span class="hl-1">(</span><span class="hl-2">&#39;template.xlsx&#39;</span><span class="hl-1">, {</span><br/><span class="hl-1">  </span><span class="hl-5">teacher:</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-5">name:</span><span class="hl-1"> </span><span class="hl-2">&#39;Nguyễn Văn A&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  },</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-4">await</span><span class="hl-1"> </span><span class="hl-0">writeFile</span><span class="hl-1">(</span><span class="hl-2">&#39;output.xlsx&#39;</span><span class="hl-1">, </span><span class="hl-5">result</span><span class="hl-1">.</span><span class="hl-5">output</span><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Đăng ký helper:</p>
+<pre><code class="ts"><span class="hl-5">engine</span><span class="hl-1">.</span><span class="hl-0">registerHelper</span><span class="hl-1">(</span><span class="hl-2">&#39;sum&#39;</span><span class="hl-1">, ([</span><span class="hl-5">values</span><span class="hl-1">]) </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-4">if</span><span class="hl-1"> (!</span><span class="hl-5">Array</span><span class="hl-1">.</span><span class="hl-0">isArray</span><span class="hl-1">(</span><span class="hl-5">values</span><span class="hl-1">)) {</span><br/><span class="hl-1">    </span><span class="hl-4">return</span><span class="hl-1"> </span><span class="hl-8">0</span><span class="hl-1">;</span><br/><span class="hl-1">  }</span><br/><br/><span class="hl-1">  </span><span class="hl-4">return</span><span class="hl-1"> </span><span class="hl-5">values</span><span class="hl-1">.</span><span class="hl-0">reduce</span><span class="hl-1">((</span><span class="hl-5">total</span><span class="hl-1">, </span><span class="hl-5">value</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-5">total</span><span class="hl-1"> + </span><span class="hl-0">Number</span><span class="hl-1">(</span><span class="hl-5">value</span><span class="hl-1">), </span><span class="hl-8">0</span><span class="hl-1">);</span><br/><span class="hl-1">});</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Template:</p>
+<pre><code class="text">{{sum(scores)}}
+</code><button type="button">Copy</button></pre>
+
+<h2 id="trạng-thái-hiện-tại" class="tsd-anchor-link">Trạng Thái Hiện Tại<a href="#trạng-thái-hiện-tại" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Repo hiện có pipeline render ExcelJS thật cho placeholder, helper, loop theo dòng/cột, grid, block, image, merge/style clone, formula shifting và multi-sheet rendering. Các báo cáo production-readiness vẫn đánh dấu giới hạn lớn như <code>100k rows</code>, <code>5k columns</code> và <code>50 worksheets</code> là chưa được chứng minh bằng stress benchmark.</p>
+<p>Tài liệu chi tiết:</p>
+<ul>
+<li><a href="media/USAGE.md">Hướng dẫn sử dụng</a></li>
+<li><a href="media/BUILD.md">Hướng dẫn build và publish</a></li>
+<li><a href="media/CORE_ENGINE.md">Core Engine</a></li>
+<li><a href="media/ARCHITECTURE.md">Kiến trúc</a></li>
+<li><a href="media/ROADMAP.md">Lộ trình</a></li>
+<li><a href="media/MANAGERS.md">Thiết kế manager</a></li>
+<li><a href="media/DIAGRAMS.md">Diagram</a></li>
+<li><a href="media/TASKS.md">Danh sách task triển khai</a></li>
+</ul>
+<p>Tài liệu production-readiness:</p>
+<ul>
+<li><a href="media/ARCHITECTURE_REVIEW.md">Architecture Review</a></li>
+<li><a href="media/PERFORMANCE_REPORT.md">Performance Report</a></li>
+<li><a href="media/SECURITY_REVIEW.md">Security Review</a></li>
+<li><a href="media/REFACTOR_PLAN.md">Refactor Plan</a></li>
+<li><a href="media/NPM_PUBLISH_CHECKLIST.md">NPM Publish Checklist</a></li>
+<li><a href="media/API_DOCUMENTATION.md">API Documentation</a></li>
+<li><a href="media/TYPEDOC.md">Typedoc</a></li>
+<li><a href="media/MIGRATION_GUIDE.md">Migration Guide</a></li>
+<li><a href="media/XLSX_TEMPLATE_COMPARISON.md">xlsx-template Comparison</a></li>
+</ul>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#excel-template-engine"><span>excel-<wbr/>template-<wbr/>engine</span></a><ul><li><a href="#mục-tiêu"><span>Mục <wbr/>Tiêu</span></a></li><li><a href="#cài-đặt-phát-triển"><span>Cài Đặt <wbr/>Phát <wbr/>Triển</span></a></li><li><a href="#biên-dịch-thành-thư-viện"><span>Biên <wbr/>Dịch <wbr/>Thành <wbr/>Thư <wbr/>Viện</span></a></li><li><a href="#cách-sử-dụng"><span>Cách <wbr/>Sử <wbr/>Dụng</span></a></li><li><a href="#trạng-thái-hiện-tại"><span>Trạng <wbr/>Thái <wbr/>Hiện <wbr/>Tại</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">excel-template-engine</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>

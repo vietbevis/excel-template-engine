@@ -1,0 +1,9 @@
+dist
+dist-test
+dist-examples
+dist-benchmark
+node_modules
+coverage
+examples/output
+.DS_Store
+*.log

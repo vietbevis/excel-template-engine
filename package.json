@@ -1,0 +1,58 @@
+{
+  "name": "excel-template-engine",
+  "version": "0.1.0",
+  "description": "TypeScript template engine for generating XLSX workbooks from Excel templates and JSON data.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "docs"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && tsc -p tsconfig.test.json && node --test \"dist-test/test/**/*.test.js\"",
+    "example:basic": "tsc -p tsconfig.examples.json && node dist-examples/examples/basic.js",
+    "benchmark:placeholder": "tsc -p tsconfig.benchmark.json && node dist-benchmark/benchmarks/placeholder-renderer.benchmark.js",
+    "benchmark:style-clone": "tsc -p tsconfig.benchmark.json && node dist-benchmark/benchmarks/style-clone-manager.benchmark.js",
+    "benchmark:large": "tsc -p tsconfig.benchmark.json && node dist-benchmark/benchmarks/large-workbook.benchmark.js",
+    "docs:api": "typedoc",
+    "clean": "rimraf dist"
+  },
+  "keywords": [
+    "excel",
+    "xlsx",
+    "template",
+    "typescript",
+    "exceljs"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "exceljs": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "rimraf": "^6.0.1",
+    "typedoc": "^0.28.19",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18.18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "overrides": {
+    "uuid": "^11.1.1"
+  }
+}
