@@ -11,6 +11,7 @@ export type RenderOperation =
   | CloneColumnOperation
   | CloneBlockOperation
   | InsertImageOperation
+  | DeleteRowsOperation
   | ApplyMergeOperation
   | ShiftFormulaOperation
   | ClearFormulaCacheOperation;
@@ -54,6 +55,12 @@ export interface InsertImageOperation extends BaseOperation {
   readonly source: unknown;
   readonly width?: number;
   readonly height?: number;
+}
+
+export interface DeleteRowsOperation extends BaseOperation {
+  readonly type: 'DeleteRows';
+  readonly startRow: number;
+  readonly count: number;
 }
 
 export interface ApplyMergeOperation extends BaseOperation {

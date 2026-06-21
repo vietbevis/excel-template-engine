@@ -23,6 +23,9 @@ import type { EvaluationContext } from '../../core/evaluator/evaluation-context.
 import type { DefaultHelperRegistry } from '../../core/evaluator/helper-registry.js';
 import type { EngineRenderOptions, HelperContext } from '../engine/types.js';
 import type { RenderOperation, RenderPlan } from './render-plan.js';
+import { LimitExceededError } from '../../shared/errors/engine-error.js';
+import { LoopContext } from '../../core/render/loop-context.js';
+import type { PathResolutionContext } from '../../core/evaluator/json-path-resolver.js';
 
 export class RenderPlanner {
   private readonly evaluator = new ExpressionEvaluator();
@@ -44,9 +47,12 @@ export class RenderPlanner {
     for (const sheet of ast.sheets) {
       const blockRegions = this.findBlockRegions(sheet);
       const skippedCells = new Set<string>();
+      const deferredOperations: RenderOperation[] = [];
       for (const region of blockRegions) {
         region.cellsToSkip.forEach((key) => skippedCells.add(key));
-        operations.push(...await this.planBlockRegion(sheet.name, region, context, options, warnings));
+        const blockPlan = await this.planBlockRegion(sheet.name, region, context, options, warnings);
+        operations.push(...blockPlan.operations);
+        deferredOperations.push(...blockPlan.deferredOperations);
       }
 
       for (const row of sheet.rows) {
@@ -92,6 +98,7 @@ export class RenderPlanner {
         }
       }
 
+      operations.push(...this.sortDeferredDeletes(deferredOperations));
       this.validateOperationLimit(operations.length, options);
     }
 
@@ -154,10 +161,7 @@ export class RenderPlanner {
   ): Promise<RenderOperation[]> {
     const collection = this.evaluator.evaluate(
       node.path,
-      {
-        root: context.root,
-        current: context.current,
-      },
+      this.toResolutionContext(context),
       {
         ...this.toEvaluatorOptions(options),
       },
@@ -197,7 +201,7 @@ export class RenderPlanner {
     }
 
     for (let index = 0; index < collection.length; index += 1) {
-      const itemContext = context.child(collection[index]);
+      const itemContext = context.child(collection[index], LoopContext.forItem(index, collection.length, context.loop));
       const parts = await Promise.all(
         node.children.map((child) => this.evaluateNode(child, itemContext, options, warnings)),
       );
@@ -243,7 +247,7 @@ export class RenderPlanner {
     }
 
     for (let index = 0; index < collection.length; index += 1) {
-      const itemContext = context.child(collection[index]);
+      const itemContext = context.child(collection[index], LoopContext.forItem(index, collection.length, context.loop));
       operations.push(this.createSetCellOperation(
         sheetName,
         {
@@ -335,10 +339,7 @@ export class RenderPlanner {
         cell: cell.address,
         source: this.evaluator.evaluate(
           node.path,
-          {
-            root: context.root,
-            current: context.current,
-          },
+          this.toResolutionContext(context),
           {
             ...this.toEvaluatorOptions(options),
           },
@@ -369,10 +370,12 @@ export class RenderPlanner {
         return '';
       case 'EachNode':
       case 'EachColumnNode':
+      case 'BlockNode':
+        return this.evaluateRepeated(node.path, node.children, context, options, warnings);
       case 'GridNode':
+        return this.evaluateInlineGrid(node, context, options, warnings);
       case 'BlockStartNode':
       case 'BlockEndNode':
-      case 'BlockNode':
         warnings.push(`Node ${node.kind} cần renderer layout nâng cao, hiện được bỏ qua an toàn.`);
         return '';
       default:
@@ -387,10 +390,7 @@ export class RenderPlanner {
   ): unknown {
     const value = this.evaluator.evaluate(
       node.path,
-      {
-        root: context.root,
-        current: context.current,
-      },
+      this.toResolutionContext(context),
       {
         ...this.toEvaluatorOptions(options),
       },
@@ -425,10 +425,7 @@ export class RenderPlanner {
 
     return this.evaluator.evaluate(
       arg.value,
-      {
-        root: context.root,
-        current: context.current,
-      },
+      this.toResolutionContext(context),
       {
         ...this.toEvaluatorOptions(options),
       },
@@ -443,10 +440,7 @@ export class RenderPlanner {
   ): Promise<unknown> {
     const condition = this.evaluator.evaluate(
       node.conditionPath,
-      {
-        root: context.root,
-        current: context.current,
-      },
+      this.toResolutionContext(context),
       {
         ...this.toEvaluatorOptions(options),
       },
@@ -461,6 +455,63 @@ export class RenderPlanner {
     );
 
     return parts.map((part) => this.stringify(part)).join('');
+  }
+
+  private async evaluateRepeated(
+    path: string,
+    children: readonly TemplateNode[],
+    context: EvaluationContext,
+    options: EngineRenderOptions,
+    warnings: string[],
+  ): Promise<string> {
+    const collection = this.resolveArray(path, context, options, warnings, 'Inline repeat');
+    if (!collection || collection.length === 0) {
+      return '';
+    }
+
+    const parts: string[] = [];
+    for (let index = 0; index < collection.length; index += 1) {
+      const itemContext = context.child(
+        collection[index],
+        LoopContext.forItem(index, collection.length, context.loop),
+      );
+      parts.push(await this.evaluateChildren(children, itemContext, options, warnings));
+    }
+
+    return parts.join('');
+  }
+
+  private async evaluateInlineGrid(
+    node: GridNode,
+    context: EvaluationContext,
+    options: EngineRenderOptions,
+    warnings: string[],
+  ): Promise<string> {
+    const rows = this.resolveArray(node.rowPath, context, options, warnings, 'Inline grid rows');
+    const columns = this.resolveArray(node.columnPath, context, options, warnings, 'Inline grid columns');
+    if (!rows || !columns || rows.length === 0 || columns.length === 0) {
+      return '';
+    }
+
+    const parts: string[] = [];
+    for (let rowIndex = 0; rowIndex < rows.length; rowIndex += 1) {
+      for (let columnIndex = 0; columnIndex < columns.length; columnIndex += 1) {
+        const gridContext = new GridContext({
+          row: rows[rowIndex],
+          column: columns[columnIndex],
+          rowIndex,
+          columnIndex,
+        });
+        parts.push(await this.evaluateChildren(
+          node.children,
+          context.child(gridContext.toCurrentScope()),
+          options,
+          warnings,
+        ));
+      }
+    }
+
+    return parts.join('');
   }
 
   private stringify(value: unknown): string {
@@ -479,6 +530,12 @@ export class RenderPlanner {
     return options.missingValue ? { missingValue: options.missingValue } : {};
   }
 
+  private toResolutionContext(context: EvaluationContext): PathResolutionContext {
+    return context.loop
+      ? { root: context.root, current: context.current, loop: context.loop }
+      : { root: context.root, current: context.current };
+  }
+
   private validateWorkbookLimits(ast: WorkbookAST, options: EngineRenderOptions): void {
     const limits = options.limits;
     if (!limits) {
@@ -486,7 +543,7 @@ export class RenderPlanner {
     }
 
     if (limits.maxWorksheets !== undefined && ast.sheets.length > limits.maxWorksheets) {
-      throw new Error(`Workbook exceeds maxWorksheets limit: ${ast.sheets.length} > ${limits.maxWorksheets}`);
+      throw new LimitExceededError('maxWorksheets', ast.sheets.length, limits.maxWorksheets);
     }
 
     for (const sheet of ast.sheets) {
@@ -497,11 +554,11 @@ export class RenderPlanner {
       }, 0);
 
       if (limits.maxRows !== undefined && maxRow > limits.maxRows) {
-        throw new Error(`Worksheet "${sheet.name}" exceeds maxRows limit: ${maxRow} > ${limits.maxRows}`);
+        throw new LimitExceededError('maxRows', maxRow, limits.maxRows, { sheetName: sheet.name });
       }
 
       if (limits.maxColumns !== undefined && maxColumn > limits.maxColumns) {
-        throw new Error(`Worksheet "${sheet.name}" exceeds maxColumns limit: ${maxColumn} > ${limits.maxColumns}`);
+        throw new LimitExceededError('maxColumns', maxColumn, limits.maxColumns, { sheetName: sheet.name });
       }
     }
   }
@@ -509,7 +566,7 @@ export class RenderPlanner {
   private validateOperationLimit(operationCount: number, options: EngineRenderOptions): void {
     const maxOperations = options.limits?.maxOperations;
     if (maxOperations !== undefined && operationCount > maxOperations) {
-      throw new Error(`Render plan exceeds maxOperations limit: ${operationCount} > ${maxOperations}`);
+      throw new LimitExceededError('maxOperations', operationCount, maxOperations);
     }
   }
 
@@ -535,10 +592,7 @@ export class RenderPlanner {
   ): readonly unknown[] | undefined {
     const value = this.evaluator.evaluate(
       path,
-      {
-        root: context.root,
-        current: context.current,
-      },
+      this.toResolutionContext(context),
       {
         ...this.toEvaluatorOptions(options),
       },
@@ -625,13 +679,19 @@ export class RenderPlanner {
     context: EvaluationContext,
     options: EngineRenderOptions,
     warnings: string[],
-  ): Promise<RenderOperation[]> {
+  ): Promise<BlockPlanResult> {
     const collection = this.resolveArray(region.startCell.nodes[0].path, context, options, warnings, 'BlockNode');
     if (!collection || collection.length === 0) {
-      return [
-        this.createSetCellOperation(sheetName, region.startCell.address, ''),
-        this.createSetCellOperation(sheetName, region.endCell.address, ''),
-      ];
+      return {
+        operations: [],
+        deferredOperations: [{
+          id: `delete_empty_block_${sheetName}_${region.startCell.address.row}`,
+          type: 'DeleteRows',
+          sheetName,
+          startRow: region.startCell.address.row,
+          count: region.endCell.address.row - region.startCell.address.row + 1,
+        }],
+      };
     }
 
     const operations: RenderOperation[] = [];
@@ -669,7 +729,10 @@ export class RenderPlanner {
     operations.push(this.createSetCellOperation(sheetName, region.startCell.address, ''));
 
     for (let itemIndex = 0; itemIndex < collection.length; itemIndex += 1) {
-      const itemContext = context.child(collection[itemIndex]);
+      const itemContext = context.child(
+        collection[itemIndex],
+        LoopContext.forItem(itemIndex, collection.length, context.loop),
+      );
       for (const templateCell of region.bodyCells) {
         if (templateCell.nodes.length === 0) {
           continue;
@@ -696,7 +759,35 @@ export class RenderPlanner {
       column: region.endCell.address.column,
     }, ''));
 
-    return operations;
+    return {
+      operations,
+      deferredOperations: [
+        {
+          id: `delete_block_end_${sheetName}_${region.endCell.address.row}`,
+          type: 'DeleteRows',
+          sheetName,
+          startRow: region.endCell.address.row + (collection.length - 1) * blockHeight,
+          count: 1,
+        },
+        {
+          id: `delete_block_start_${sheetName}_${region.startCell.address.row}`,
+          type: 'DeleteRows',
+          sheetName,
+          startRow: region.startCell.address.row,
+          count: 1,
+        },
+      ],
+    };
+  }
+
+  private sortDeferredDeletes(operations: readonly RenderOperation[]): readonly RenderOperation[] {
+    return [...operations].sort((left, right) => {
+      if (left.type === 'DeleteRows' && right.type === 'DeleteRows') {
+        return right.startRow - left.startRow;
+      }
+
+      return 0;
+    });
   }
 
   private cellKey(cell: CellAST): string {
@@ -712,4 +803,9 @@ interface BlockRegion {
   readonly minColumn: number;
   readonly maxColumn: number;
   readonly cellsToSkip: readonly string[];
+}
+
+interface BlockPlanResult {
+  readonly operations: readonly RenderOperation[];
+  readonly deferredOperations: readonly RenderOperation[];
 }

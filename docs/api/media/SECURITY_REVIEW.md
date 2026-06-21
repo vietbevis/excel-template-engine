@@ -4,7 +4,7 @@ Date: 2026-06-21
 
 ## Executive Summary
 
-No dependency vulnerabilities were reported by `npm audit --omit=dev`. The project avoids `eval` and the `Function` constructor in expression evaluation, which is a strong default for template safety. The main security concerns are filesystem asset loading, unbounded input sizes, formula injection semantics, and lack of documented trust boundaries.
+No dependency vulnerabilities were reported by `npm audit --omit=dev`. The project avoids `eval` and the `Function` constructor in expression evaluation, which is a strong default for template safety. Filesystem asset loading and image size limits now have safer defaults. The main remaining security concerns are template/output size limits, formula trust boundaries, and private ExcelJS API compatibility.
 
 This is a TypeScript/Node library, not a web server. The available security skill references were web-framework-specific and did not directly apply, so this review uses general Node package security practices plus source inspection.
 
@@ -12,35 +12,35 @@ This is a TypeScript/Node library, not a web server. The available security skil
 
 - `npm audit --omit=dev`: 0 vulnerabilities.
 - `ExpressionEvaluator` parses a restricted expression language instead of executing JavaScript.
-- `DefaultAssetResolver` reads user-provided image paths from disk.
+- `DefaultAssetResolver` resolves relative image paths inside a base directory, rejects absolute paths by default, and enforces image byte limits.
 - Excel formula cells are preserved/shifted and may execute when opened by Excel.
 
 ## Findings
 
 ### High
 
-S1. Unrestricted image path reads
+S1. Unrestricted image path reads - mitigated by default
 
-Evidence: `src/infrastructure/assets/default-asset-resolver.ts:39-40` resolves a string source and reads it from disk.
+Evidence: `DefaultAssetResolver` resolves relative paths inside a configured `baseDir`, rejects absolute image paths by default, and rejects path traversal outside `baseDir`.
 
-Impact: If untrusted JSON controls `{{image avatar}}`, it can cause the library host process to read arbitrary local files that exist and look like PNG/JPG.
-
-Recommendation:
-
-- Add an `AssetResolverOptions` policy with `allowAbsolutePaths`, `baseDir`, and `maxBytes`.
-- Default to rejecting absolute paths unless explicitly enabled.
-- Reject path traversal outside `baseDir`.
-
-S2. No input size limits
-
-Evidence: `src/infrastructure/assets/default-asset-resolver.ts:31-40` decodes base64 or reads whole files; `src/infrastructure/exceljs/excel-js-workbook-renderer.ts:20-31` loads whole templates; `write()` returns a full `Uint8Array`.
-
-Impact: Untrusted templates or image payloads can cause memory exhaustion.
+Residual impact: hosts can explicitly enable absolute paths with `allowAbsolutePaths`, so production apps must only enable that for trusted data.
 
 Recommendation:
 
-- Add configurable limits for template bytes, image bytes, worksheets, rows, columns, and render operations.
-- Return structured errors when limits are exceeded.
+- Keep `allowAbsolutePaths` disabled for untrusted data.
+- Document the trust boundary for custom `AssetResolver` implementations.
+
+S2. No input size limits - partially mitigated
+
+Evidence: `DefaultAssetResolver` has `maxBytes` for file, buffer, and base64 images. `RenderPlanner` has `limits` for worksheets, rows, columns, and render operations. `ExcelJsWorkbookRenderer` enforces `maxTemplateBytes` before loading template files or buffers.
+
+Residual impact: full ExcelJS output size is still not bounded by default.
+
+Recommendation:
+
+- Add output/write memory guidance.
+- Continue expanding full render benchmarks.
+- Structured `LimitExceededError` is now available for limit violations.
 
 ### Medium
 
@@ -82,7 +82,7 @@ Recommendation:
 
 - No JavaScript evaluation in templates.
 - Explicit missing-value policy.
-- Bounded asset resolver.
+- Bounded asset resolver with default absolute-path rejection.
 - Optional formula stripping.
 - Limit-aware render options.
 - Document trusted/untrusted input model.

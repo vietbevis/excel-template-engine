@@ -1,8 +1,10 @@
+import { stat } from 'node:fs/promises';
 import ExcelJS from 'exceljs';
 import { dirname } from 'node:path';
+import type { RenderLimits } from '../../application/engine/types.js';
 import type { TemplateInput } from '../../application/engine/types.js';
 import type { AssetResolverOptions, WorkbookRenderer, WorkbookTemplateSource } from '../../application/managers/ports.js';
-import type { RenderPlan } from '../../application/planner/render-plan.js';
+import type { RenderOperation, RenderPlan } from '../../application/planner/render-plan.js';
 import type {
   CellTemplateSource,
   RowTemplateSource,
@@ -10,6 +12,7 @@ import type {
 } from '../../core/template/workbook-template-source.js';
 import { DefaultAssetResolver } from '../assets/default-asset-resolver.js';
 import { ExcelJsWorksheetRenderer } from './excel-js-worksheet-renderer.js';
+import { LimitExceededError } from '../../shared/errors/engine-error.js';
 
 type ExcelJsLoadInput = Parameters<ExcelJS.Xlsx['load']>[0];
 
@@ -23,11 +26,14 @@ export class ExcelJsWorkbookRenderer implements WorkbookRenderer {
     this.workbook = new ExcelJS.Workbook();
 
     if (typeof input === 'string') {
+      await this.assertTemplateFileSize(input);
       this.templateBaseDir = dirname(input);
       await this.workbook.xlsx.readFile(input);
     } else {
       this.templateBaseDir = process.cwd();
-      await this.workbook.xlsx.load(this.toBuffer(input) as unknown as ExcelJsLoadInput);
+      const buffer = this.toBuffer(input);
+      this.assertTemplateBufferSize(buffer.byteLength);
+      await this.workbook.xlsx.load(buffer as unknown as ExcelJsLoadInput);
     }
 
     return this.scanWorkbook(this.workbook);
@@ -35,13 +41,15 @@ export class ExcelJsWorkbookRenderer implements WorkbookRenderer {
 
   async apply(plan: RenderPlan): Promise<void> {
     const workbook = this.requireWorkbook();
-    const operationsBySheet = new Map<string, RenderPlan['operations']>();
+    const operationsBySheet = new Map<string, RenderOperation[]>();
 
     for (const operation of plan.operations) {
-      operationsBySheet.set(operation.sheetName, [
-        ...(operationsBySheet.get(operation.sheetName) ?? []),
-        operation,
-      ]);
+      const sheetOperations = operationsBySheet.get(operation.sheetName);
+      if (sheetOperations) {
+        sheetOperations.push(operation);
+      } else {
+        operationsBySheet.set(operation.sheetName, [operation]);
+      }
     }
 
     await Promise.all([...operationsBySheet].map(async ([sheetName, operations]) => {
@@ -54,9 +62,7 @@ export class ExcelJsWorkbookRenderer implements WorkbookRenderer {
         ...this.options.assetResolver,
         baseDir: this.options.assetResolver?.baseDir ?? this.templateBaseDir,
       }));
-      for (const operation of operations) {
-        await renderer.apply(operation);
-      }
+      await renderer.applyAll(operations);
     }));
   }
 
@@ -135,6 +141,27 @@ export class ExcelJsWorkbookRenderer implements WorkbookRenderer {
     return Buffer.from(input);
   }
 
+  private async assertTemplateFileSize(filePath: string): Promise<void> {
+    const maxTemplateBytes = this.options.limits?.maxTemplateBytes;
+    if (maxTemplateBytes === undefined) {
+      return;
+    }
+
+    const fileStat = await stat(filePath);
+    if (fileStat.size > maxTemplateBytes) {
+      throw new LimitExceededError('maxTemplateBytes', fileStat.size, maxTemplateBytes, { filePath });
+    }
+  }
+
+  private assertTemplateBufferSize(byteLength: number): void {
+    const maxTemplateBytes = this.options.limits?.maxTemplateBytes;
+    if (maxTemplateBytes === undefined || byteLength <= maxTemplateBytes) {
+      return;
+    }
+
+    throw new LimitExceededError('maxTemplateBytes', byteLength, maxTemplateBytes);
+  }
+
   private requireWorkbook(): ExcelJS.Workbook {
     if (!this.workbook) {
       throw new Error('Workbook has not been loaded.');
@@ -146,4 +173,5 @@ export class ExcelJsWorkbookRenderer implements WorkbookRenderer {
 
 export interface ExcelJsWorkbookRendererOptions {
   readonly assetResolver?: AssetResolverOptions;
+  readonly limits?: Pick<RenderLimits, 'maxTemplateBytes'>;
 }

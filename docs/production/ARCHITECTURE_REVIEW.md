@@ -6,17 +6,17 @@ Date: 2026-06-21
 
 The project is moving in the right direction for a production TypeScript XLSX template engine: core parsing/evaluation is separated from ExcelJS infrastructure, render intent is expressed through `RenderPlan`, and the public API is small. Current tests cover placeholders, helpers, loops, blocks, images, formula shifting, merge/style cloning, and multi-sheet rendering.
 
-The main production gaps are not feature discovery; they are scale guarantees, stronger package boundaries, and large-workbook operational controls. The current implementation is suitable for small to medium templates, but 100k rows, 5k columns, and 50 worksheets need dedicated streaming or bounded-memory design before claiming production readiness at that scale.
+The main production gaps are no longer feature discovery; they are API stabilization, stronger package boundaries, and bounded-memory guarantees for complex large workbooks. The current ExcelJS backend has benchmark evidence for minimal 100k-row, 5k-column, and 50-worksheet renders, but production policy should still define measured limits for styled, merged, image-heavy, and formula-heavy templates.
 
 ## Evidence Reviewed
 
 - Source files: 40 TypeScript source files under `src`.
-- Tests: 20 TypeScript tests under `test`.
+- Tests: 22 TypeScript tests under `test`.
 - Verification run: `npm run typecheck` passed.
-- Verification run: `npm test` passed, 51/51 tests.
+- Verification run: `npm test` passed, 56/56 tests.
 - Dependency audit: `npm audit --omit=dev` reported 0 vulnerabilities.
-- Package dry run: `npm pack --dry-run` produced a 59.1 kB package with 170 files.
-- Dependency graph scan: 40 files, 93 internal edges, 0 cycles after moving `TemplateInput` into the ports layer.
+- Package dry run after `build` and Typedoc generation: `npm pack --dry-run` produced a 172.9 kB package with 293 files.
+- Dependency graph scan: 40 files, 98 internal edges, 0 cycles.
 
 ## Layering
 
@@ -99,7 +99,7 @@ This was removed by defining `TemplateInput` in `src/application/managers/ports.
 
 ## Production Readiness Verdict
 
-Status: not yet production-ready for the stated upper bounds.
+Status: production-capable for the stated minimal upper-bound benchmarks, but not yet fully proven for complex upper-bound templates.
 
 Ready for:
 
@@ -109,11 +109,17 @@ Ready for:
 - row/column/grid/block/image rendering;
 - multi-sheet rendering with worksheet-level concurrency.
 
-Not yet proven for:
+Proven for minimal stress templates:
 
 - 100k rows;
 - 5k columns;
 - 50 worksheets;
+
+The planning stage has benchmark coverage for these targets. Full ExcelJS apply/write now completes for minimal 100k-row, 5k-column, and 50-worksheet workbooks. The 100k-row path improved after fixing O(n^2) operation grouping in `ExcelJsWorkbookRenderer.apply()`.
+
+Not yet fully proven for:
+
 - adversarial templates;
+- styled/merged/formula-heavy 100k-row workbooks;
 - strict package API stability;
 - streaming or memory-bounded rendering.

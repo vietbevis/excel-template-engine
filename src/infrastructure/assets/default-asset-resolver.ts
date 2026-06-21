@@ -1,6 +1,7 @@
 import { readFile, stat } from 'node:fs/promises';
 import { extname, isAbsolute, relative, resolve } from 'node:path';
 import type { AssetResolver, AssetResolverOptions, ResolvedAsset } from '../../application/managers/ports.js';
+import { LimitExceededError } from '../../shared/errors/engine-error.js';
 
 export class DefaultAssetResolver implements AssetResolver {
   private readonly baseDir: string;
@@ -53,7 +54,7 @@ export class DefaultAssetResolver implements AssetResolver {
 
   private resolveBytes(bytes: Uint8Array, extensionHint?: string): ResolvedAsset {
     if (bytes.byteLength > this.maxBytes) {
-      throw new Error(`Image exceeds maxBytes limit: ${bytes.byteLength} > ${this.maxBytes}`);
+      throw new LimitExceededError('maxImageBytes', bytes.byteLength, this.maxBytes);
     }
 
     const extension = this.normalizeExtension(extensionHint) ?? this.detectExtension(bytes);
@@ -112,7 +113,7 @@ export class DefaultAssetResolver implements AssetResolver {
   private decodeBase64(value: string): Buffer {
     const estimatedBytes = Math.floor((value.replace(/=+$/, '').length * 3) / 4);
     if (estimatedBytes > this.maxBytes) {
-      throw new Error(`Image exceeds maxBytes limit: ${estimatedBytes} > ${this.maxBytes}`);
+      throw new LimitExceededError('maxImageBytes', estimatedBytes, this.maxBytes);
     }
 
     return Buffer.from(value, 'base64');
@@ -138,7 +139,7 @@ export class DefaultAssetResolver implements AssetResolver {
   private async assertFileSize(filePath: string): Promise<void> {
     const fileStat = await stat(filePath);
     if (fileStat.size > this.maxBytes) {
-      throw new Error(`Image exceeds maxBytes limit: ${fileStat.size} > ${this.maxBytes}`);
+      throw new LimitExceededError('maxImageBytes', fileStat.size, this.maxBytes, { filePath });
     }
   }
 }

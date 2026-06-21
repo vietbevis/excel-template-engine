@@ -28,6 +28,14 @@ Output:
 docs/api
 ```
 
+Latest verification:
+
+```bash
+npm run docs:api
+```
+
+Result: generated HTML at `docs/api` without warnings.
+
 ## Publishing Policy
 
 Before publishing, decide whether generated `docs/api` should be committed and shipped in the npm package. The current package `files` field includes `docs`, so generated API docs will be included if present.

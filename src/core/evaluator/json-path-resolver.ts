@@ -3,7 +3,7 @@ import type { LoopContext } from '../render/loop-context.js';
 export interface PathResolutionContext {
   readonly root: unknown;
   readonly current: unknown;
-  readonly loop?: LoopContext;
+  readonly loop?: LoopContext | undefined;
 }
 
 export class JsonPathResolver {

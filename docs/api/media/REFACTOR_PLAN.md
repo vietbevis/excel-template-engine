@@ -18,10 +18,12 @@ Date: 2026-06-21
    - `maxOperations`
    - `maxImageBytes`
    - `maxTemplateBytes`
+   - Status: planner limits are implemented for worksheets, rows, columns, and operations. Image byte limit is implemented through `AssetResolverOptions.maxBytes`. Template byte limit is implemented through `RenderLimits.maxTemplateBytes`. Limit violations now use `LimitExceededError`.
 2. Add `AssetResolverOptions`:
    - reject absolute paths by default;
    - enforce baseDir containment;
    - enforce max byte size.
+   - Status: implemented in `DefaultAssetResolver`.
 3. Add `FormulaPolicy`:
    - `preserve`
    - `strip`
@@ -30,6 +32,7 @@ Date: 2026-06-21
    - 100k rows;
    - 5k columns;
    - 50 worksheets.
+   - Status: planning benchmark is implemented with `npm run benchmark:large`. Full ExcelJS apply/write benchmark is implemented for 100k rows, 5k columns, and 50 worksheets. Latest minimal full-render results: 100k rows in 715 ms, 5k columns in 54 ms, and 50 worksheets in 54 ms.
 
 ## Priority 2: Decompose Planning
 
@@ -62,7 +65,8 @@ This improves open/closed design and makes operation-specific tests smaller.
 2. Add configurable worksheet concurrency.
 3. Cache merge ranges per sheet operation batch.
 4. Skip style clone for empty/default cells.
-5. Investigate XML-level clone backend for massive row/column expansion.
+5. Keep append-only per-sheet operation grouping; avoid array-copy accumulation in hot paths.
+6. Investigate XML-level clone backend for massive styled row/column expansion.
 
 ## Priority 5: Public API Stabilization
 

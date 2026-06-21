@@ -16,6 +16,8 @@
   "files": [
     "dist",
     "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
     "docs"
   ],
   "scripts": {
@@ -23,9 +25,15 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "npm run build && tsc -p tsconfig.test.json && node --test \"dist-test/test/**/*.test.js\"",
     "example:basic": "tsc -p tsconfig.examples.json && node dist-examples/examples/basic.js",
+    "example:showcase:template": "tsc -p tsconfig.examples.json && node dist-examples/examples/create-production-showcase-template.js",
+    "example:showcase": "tsc -p tsconfig.examples.json && node dist-examples/examples/production-showcase.js",
     "benchmark:placeholder": "tsc -p tsconfig.benchmark.json && node dist-benchmark/benchmarks/placeholder-renderer.benchmark.js",
     "benchmark:style-clone": "tsc -p tsconfig.benchmark.json && node dist-benchmark/benchmarks/style-clone-manager.benchmark.js",
     "benchmark:large": "tsc -p tsconfig.benchmark.json && node dist-benchmark/benchmarks/large-workbook.benchmark.js",
+    "benchmark:large-render": "tsc -p tsconfig.benchmark.json && node dist-benchmark/benchmarks/large-render.benchmark.js",
+    "benchmark:large-render:rows": "tsc -p tsconfig.benchmark.json && node dist-benchmark/benchmarks/large-render.benchmark.js --target=rows",
+    "benchmark:large-render:columns": "tsc -p tsconfig.benchmark.json && node dist-benchmark/benchmarks/large-render.benchmark.js --target=columns",
+    "benchmark:large-render:sheets": "tsc -p tsconfig.benchmark.json && node dist-benchmark/benchmarks/large-render.benchmark.js --target=sheets",
     "docs:api": "typedoc",
     "clean": "rimraf dist"
   },

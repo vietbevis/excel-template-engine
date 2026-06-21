@@ -8,6 +8,10 @@ Date: 2026-06-21
 npm install excel-template-engine
 ```
 
+## API Stability
+
+Version `0.1.x` treats `ExcelTemplateEngine`, `EngineRenderOptions`, `EngineRenderResult`, helper registration, render limits, and asset resolver options as the stable public API. AST nodes, render-plan operations, and ExcelJS infrastructure classes are exported for advanced users and tests, but may change before `1.0.0`.
+
 ## Basic Usage
 
 ```ts
@@ -75,10 +79,71 @@ interface EngineRenderOptions {
   readonly recalculateFormulas?: boolean;
   readonly missingValue?: 'empty-string' | 'null' | 'throw';
   readonly renderer?: WorkbookRenderer;
+  readonly limits?: RenderLimits;
+  readonly assetResolver?: AssetResolverOptions;
 }
 ```
 
 Current note: `preserveFormulas` and `recalculateFormulas` are declared but not fully enforced as production policies yet. Formula preservation/shift behavior is implemented in ExcelJS clone paths.
+
+Render limits:
+
+```ts
+interface RenderLimits {
+  readonly maxTemplateBytes?: number;
+  readonly maxWorksheets?: number;
+  readonly maxRows?: number;
+  readonly maxColumns?: number;
+  readonly maxOperations?: number;
+}
+```
+
+Asset resolver options:
+
+```ts
+interface AssetResolverOptions {
+  readonly baseDir?: string;
+  readonly allowAbsolutePaths?: boolean;
+  readonly maxBytes?: number;
+}
+```
+
+Defaults:
+
+- image paths are resolved relative to the template file directory;
+- absolute image paths are disabled by default;
+- image sources are limited to 10 MiB by default.
+- `maxTemplateBytes` rejects oversized template files or buffers before ExcelJS loads them.
+
+Example:
+
+```ts
+await engine.render('template.xlsx', data, {
+  limits: {
+    maxTemplateBytes: 5 * 1024 * 1024,
+    maxWorksheets: 50,
+    maxRows: 100_000,
+    maxColumns: 5_000,
+    maxOperations: 200_000,
+  },
+  assetResolver: {
+    maxBytes: 2 * 1024 * 1024,
+  },
+});
+```
+
+Limit violations throw `LimitExceededError`:
+
+```ts
+{
+  code: 'LIMIT_EXCEEDED',
+  details: {
+    limitName: string,
+    actual: number,
+    limit: number
+  }
+}
+```
 
 ## Helpers
 

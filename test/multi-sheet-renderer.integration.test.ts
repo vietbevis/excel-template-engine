@@ -17,7 +17,7 @@ test('render nhiều worksheet với cross sheet placeholder, formula và block'
   const details = template.addWorksheet('Details');
 
   summary.getCell('A1').value = '{{teacher.name}}';
-  summary.getCell('B1').value = { formula: 'SUM(Details!B3:B4)', result: 300 } as ExcelJS.CellValue;
+  summary.getCell('B1').value = { formula: 'SUM(Details!B2:B3)', result: 300 } as ExcelJS.CellValue;
   summary.getCell('A2').value = '{{contract.code}}';
 
   details.getCell('A1').value = '{{teacher.name}}';
@@ -47,17 +47,16 @@ test('render nhiều worksheet với cross sheet placeholder, formula và block'
 
   assert.equal(renderedSummary.getCell('A1').value, 'Nguyễn Văn A');
   assert.equal(renderedSummary.getCell('A2').value, 'HD-2026');
-  assert.deepEqual(renderedSummary.getCell('B1').value, { formula: 'SUM(Details!B3:B4)', result: 300 });
+  assert.deepEqual(renderedSummary.getCell('B1').value, { formula: 'SUM(Details!B2:B3)', result: 300 });
 
   assert.equal(renderedDetails.getCell('A1').value, 'Nguyễn Văn A');
-  assert.equal(renderedDetails.getCell('A2').value, '');
   assert.deepEqual([
+    renderedDetails.getCell('A2').value,
+    renderedDetails.getCell('B2').value,
     renderedDetails.getCell('A3').value,
     renderedDetails.getCell('B3').value,
     renderedDetails.getCell('A4').value,
-    renderedDetails.getCell('B4').value,
-    renderedDetails.getCell('A5').value,
   ], ['HD01', 100, 'HD02', 250, '']);
-  assert.deepEqual(renderedDetails.getCell('C3').value, { formula: 'Summary!$B$1+B3', result: 400 });
-  assert.deepEqual(renderedDetails.getCell('C4').value, { formula: 'Summary!$B$1+B4' });
+  assert.deepEqual(renderedDetails.getCell('C2').value, { formula: 'Summary!$B$1+B2', result: 400 });
+  assert.deepEqual(renderedDetails.getCell('C3').value, { formula: 'Summary!$B$1+B3' });
 });

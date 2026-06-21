@@ -1,0 +1,63 @@
+{
+  "teacher": {
+    "name": "Nguyen Van A"
+  },
+  "contract": {
+    "code": "HD-2026-001",
+    "total": 12500000
+  },
+  "user": {
+    "profile": {
+      "email": "teacher@example.com"
+    }
+  },
+  "scores": [8, 9, 10],
+  "logo": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/p9sAAAAASUVORK5CYII=",
+  "subjects": [
+    { "name": "Math" },
+    { "name": "Physics" },
+    { "name": "Chemistry" }
+  ],
+  "students": [
+    {
+      "code": "SV001",
+      "name": "Tran Thi B",
+      "score": 8,
+      "scores": [8, 9, 7]
+    },
+    {
+      "code": "SV002",
+      "name": "Le Van C",
+      "score": 9,
+      "scores": [9, 8, 10]
+    },
+    {
+      "code": "SV003",
+      "name": "Pham Van D",
+      "score": 10,
+      "scores": [10, 9, 9]
+    }
+  ],
+  "classes": [
+    {
+      "name": "Class A",
+      "students": [{ "name": "Tran Thi B" }, { "name": "Le Van C" }]
+    },
+    {
+      "name": "Class B",
+      "students": [{ "name": "Pham Van D" }]
+    }
+  ],
+  "contracts": [
+    {
+      "code": "C-001",
+      "title": "Teaching Contract",
+      "amount": 5000000
+    },
+    {
+      "code": "C-002",
+      "title": "Research Contract",
+      "amount": 7500000
+    }
+  ]
+}

@@ -16,7 +16,12 @@ export class TemplateEngineService {
 
   async render(request: EngineRenderRequest): Promise<EngineRenderResult> {
     const renderer = request.options?.renderer ?? new ExcelJsWorkbookRenderer(
-      request.options?.assetResolver ? { assetResolver: request.options.assetResolver } : {},
+      {
+        ...(request.options?.assetResolver ? { assetResolver: request.options.assetResolver } : {}),
+        ...(request.options?.limits?.maxTemplateBytes !== undefined
+          ? { limits: { maxTemplateBytes: request.options.limits.maxTemplateBytes } }
+          : {}),
+      },
     );
     const workbookSource = await renderer.load(request.template);
     const ast = this.parser.parseWorkbook(workbookSource);

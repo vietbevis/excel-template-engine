@@ -126,7 +126,7 @@ Template:
 
 ## Trạng Thái Hiện Tại
 
-Repo hiện có pipeline render ExcelJS thật cho placeholder, helper, loop theo dòng/cột, grid, block, image, merge/style clone, formula shifting và multi-sheet rendering. Các báo cáo production-readiness vẫn đánh dấu giới hạn lớn như `100k rows`, `5k columns` và `50 worksheets` là chưa được chứng minh bằng stress benchmark.
+Repo hiện có pipeline render ExcelJS thật cho placeholder, helper, loop theo dòng/cột, grid, block, image, merge/style clone, formula shifting và multi-sheet rendering. Stress benchmark tối thiểu hiện đã chứng minh render `100k rows`, `5k columns` và `50 worksheets`; các báo cáo production-readiness vẫn khuyến nghị đặt giới hạn đo được cho template phức tạp nhiều style, merge, formula và image.
 
 Tài liệu chi tiết:
 

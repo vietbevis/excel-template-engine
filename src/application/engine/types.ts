@@ -14,6 +14,7 @@ export interface EngineRenderOptions {
 }
 
 export interface RenderLimits {
+  readonly maxTemplateBytes?: number;
   readonly maxWorksheets?: number;
   readonly maxRows?: number;
   readonly maxColumns?: number;

@@ -34,3 +34,4 @@ export { RenderCursor } from './core/grid/render-cursor.js';
 export type * from './application/planner/render-plan.js';
 export type * from './application/managers/ports.js';
 export type * from './shared/address/address.js';
+export { EngineError, LimitExceededError } from './shared/errors/engine-error.js';

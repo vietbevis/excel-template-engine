@@ -6,5 +6,6 @@
   "tsconfig": "tsconfig.json",
   "excludePrivate": true,
   "excludeProtected": true,
+  "disableSources": true,
   "readme": "README.md"
 }

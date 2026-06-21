@@ -59,26 +59,25 @@ test('BlockNode clone cells, styles, merge, formula và images', async () => {
   const rendered = output.getWorksheet('Report');
   assert.ok(rendered);
 
-  assert.equal(rendered.getCell('A1').value, '');
-  assert.equal(rendered.getCell('A2').value, 'HD01');
-  assert.equal(rendered.getCell('C2').value, 100);
-  assert.deepEqual(rendered.getCell('D2').value, { formula: 'C2*2', result: 200 });
-  assert.equal(rendered.getCell('A3').value, 'HD02');
-  assert.equal(rendered.getCell('C3').value, 250);
-  assert.deepEqual(rendered.getCell('D3').value, { formula: 'C3*2' });
-  assert.equal(rendered.getCell('A4').value, '');
+  assert.equal(rendered.getCell('A1').value, 'HD01');
+  assert.equal(rendered.getCell('C1').value, 100);
+  assert.deepEqual(rendered.getCell('D1').value, { formula: 'C1*2', result: 200 });
+  assert.equal(rendered.getCell('A2').value, 'HD02');
+  assert.equal(rendered.getCell('C2').value, 250);
+  assert.deepEqual(rendered.getCell('D2').value, { formula: 'C2*2' });
+  assert.equal(rendered.getCell('A3').value, '');
 
-  assert.equal(rendered.getRow(3).height, 24);
-  assert.deepEqual(rendered.getCell('A3').font, rendered.getCell('A2').font);
-  assert.deepEqual(rendered.getCell('A3').fill, rendered.getCell('A2').fill);
-  assert.equal(rendered.getCell('C3').numFmt, '#,##0');
-  assert.deepEqual(rendered.getCell('D3').font, rendered.getCell('D2').font);
+  assert.equal(rendered.getRow(2).height, 24);
+  assert.deepEqual(rendered.getCell('A2').font, rendered.getCell('A1').font);
+  assert.deepEqual(rendered.getCell('A2').fill, rendered.getCell('A1').fill);
+  assert.equal(rendered.getCell('C2').numFmt, '#,##0');
+  assert.deepEqual(rendered.getCell('D2').font, rendered.getCell('D1').font);
 
   const mergeManager = new ExcelJsMergeManager(output);
   const merges = await mergeManager.collect('Report');
   assert.deepEqual(merges.map((range) => MergeRange.fromRangeAddress(range).toA1()), [
+    'A1:B1',
     'A2:B2',
-    'A3:B3',
   ]);
   assert.equal(rendered.getImages().length, 2);
 });

@@ -3,11 +3,14 @@ import assert from 'node:assert/strict';
 import { mkdtemp, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import ExcelJS from 'exceljs';
+import { ExcelTemplateEngine } from '../src/index.js';
 import { DefaultAssetResolver } from '../src/infrastructure/assets/default-asset-resolver.js';
 import { RenderPlanner } from '../src/application/planner/render-planner.js';
 import { DefaultHelperRegistry } from '../src/core/evaluator/helper-registry.js';
 import { EvaluationContext } from '../src/core/evaluator/evaluation-context.js';
 import type { WorkbookAST } from '../src/core/ast/nodes.js';
+import { LimitExceededError } from '../src/shared/errors/engine-error.js';
 
 const onePixelPngBase64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/p9sAAAAASUVORK5CYII=';
 
@@ -23,7 +26,7 @@ test('DefaultAssetResolver chặn absolute path mặc định và enforce maxByt
 
   await assert.rejects(
     () => new DefaultAssetResolver({ baseDir: dir, maxBytes: 4 }).resolve('./avatar.png'),
-    /Image exceeds maxBytes limit/,
+    LimitExceededError,
   );
 
   const asset = await new DefaultAssetResolver({ baseDir: dir }).resolve('./avatar.png');
@@ -75,20 +78,36 @@ test('RenderPlanner enforce workbook dimension và operation limits', async () =
     () => planner.createPlan(ast, EvaluationContext.root({ name: 'A' }), {
       limits: { maxRows: 1 },
     }),
-    /exceeds maxRows limit/,
+    LimitExceededError,
   );
 
   await assert.rejects(
     () => planner.createPlan(ast, EvaluationContext.root({ name: 'A' }), {
       limits: { maxColumns: 1 },
     }),
-    /exceeds maxColumns limit/,
+    LimitExceededError,
   );
 
   await assert.rejects(
     () => planner.createPlan(ast, EvaluationContext.root({ name: 'A' }), {
       limits: { maxOperations: 0 },
     }),
-    /exceeds maxOperations limit/,
+    LimitExceededError,
+  );
+});
+
+test('ExcelTemplateEngine enforce maxTemplateBytes trước khi load workbook', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'excel-template-engine-template-limit-'));
+  const templatePath = join(dir, 'template.xlsx');
+  const workbook = new ExcelJS.Workbook();
+  workbook.addWorksheet('Report').getCell('A1').value = '{{name}}';
+  await workbook.xlsx.writeFile(templatePath);
+
+  const engine = new ExcelTemplateEngine();
+  await assert.rejects(
+    () => engine.render(templatePath, { name: 'A' }, {
+      limits: { maxTemplateBytes: 1 },
+    }),
+    LimitExceededError,
   );
 });
