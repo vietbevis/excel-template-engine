@@ -68,6 +68,12 @@ export interface EachNode extends BaseNode {
 export interface EachColumnNode extends BaseNode {
   readonly kind: 'EachColumnNode';
   readonly path: string;
+  readonly spanPath?: string;
+  readonly renderPath?: string;
+  readonly rowSpanPath?: string;
+  readonly rowSpan?: number;
+  readonly reservedColumnsPath?: string;
+  readonly reservedColumns?: number;
   readonly children: readonly TemplateNode[];
 }
 

@@ -17,6 +17,8 @@ Các tính năng hướng tới:
 - Placeholder: `{{teacher.name}}`
 - Loop theo dòng: `{{#each students}}...{{/each}}`
 - Loop theo cột: `{{#each-col subjects}}...{{/each-col}}`
+- Header nhóm theo cột động: `{{#each-col groups span=size}}...{{/each-col}}`
+- Vùng cột động dựng sẵn: `{{#each-col groups span=size reserve=31}}...{{/each-col}}`
 - Clone block: `{{#block contracts}}...{{/block}}`
 - Điều kiện: `{{#if hasSignature}}...{{/if}}`
 - Helper: `{{sum(scores)}}`

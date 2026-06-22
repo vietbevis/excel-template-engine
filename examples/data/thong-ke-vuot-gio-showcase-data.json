@@ -1,0 +1,2860 @@
+{
+  "schemaVersion": 1,
+  "metadata": {
+    "facultyName": "Công nghệ thông tin",
+    "reportDay": "     ",
+    "reportMonth": "    ",
+    "reportYear": 2026
+  },
+  "teacher": {
+    "fullName": "Phạm Văn Hưởng",
+    "birthDate": "25/05/1987",
+    "academicTitle": "Tiến sĩ"
+  },
+  "sections": [
+    {
+      "title": "A.GIẢNG DẠY VÀ ĐÁNH GIÁ HỌC PHẦN (không thống kê số giờ đã được thanh toán)",
+      "blocks": [],
+      "id": "a"
+    },
+    {
+      "title": "A.1.Giảng dạy\n(Ghi rõ đối tượng giảng dạy, coi chấm chi cho từng lớp:\n     - Mật mã: Việt Nam; Lào; Cuba; Campuchia\n     - Đóng HP",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Tên học phần"
+            },
+            {
+              "key": "c3",
+              "name": "Số TC (HT)"
+            },
+            {
+              "key": "c4",
+              "name": "Lớp học phần"
+            },
+            {
+              "key": "c5",
+              "name": "Đối tượng\n(Lào, Cuba, Campuchia, Việt Nam, Đóng HP)"
+            },
+            {
+              "key": "c6",
+              "name": "Số tiết theo TKB"
+            },
+            {
+              "key": "c7",
+              "name": "Số tiết QC"
+            }
+          ],
+          "groups": [
+            {
+              "title": "Học kỳ I - Đào tạo chuyên ngành Kỹ thuật mật mã (ghi rõ đối tượng cho từng lớp)",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1,
+                    "c2": "Mạng máy tính",
+                    "c3": 2,
+                    "c4": "LT901",
+                    "c5": "Việt Nam",
+                    "c6": 60,
+                    "c7": 60
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {},
+                  "id": "item2"
+                },
+                {
+                  "values": {},
+                  "id": "item3"
+                }
+              ],
+              "total": {
+                "label": "Tổng cộng (1):",
+                "values": {
+                  "c1": "Tổng cộng (1):",
+                  "c2": "Tổng cộng (1):",
+                  "c3": "Tổng cộng (1):",
+                  "c4": "Tổng cộng (1):",
+                  "c5": "Tổng cộng (1):",
+                  "c6": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c6",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  },
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            },
+            {
+              "title": "Học kỳ I - Đào tạo hệ đóng học phí (ghi rõ đối tượng cho từng lớp)",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                },
+                {
+                  "values": {},
+                  "id": "item3"
+                }
+              ],
+              "total": {
+                "label": "Tổng cộng (2):",
+                "values": {
+                  "c1": "Tổng cộng (2):",
+                  "c2": "Tổng cộng (2):",
+                  "c3": "Tổng cộng (2):",
+                  "c4": "Tổng cộng (2):",
+                  "c5": "Tổng cộng (2):",
+                  "c6": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c6",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  },
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group2"
+            },
+            {
+              "title": "Học kỳ II - Đào tạo chuyên ngành Kỹ thuật mật mã (ghi rõ đối tượng cho từng lớp)",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                },
+                {
+                  "values": {
+                    "c1": 3
+                  },
+                  "id": "item3"
+                }
+              ],
+              "total": {
+                "label": "Tổng cộng (3):",
+                "values": {
+                  "c1": "Tổng cộng (3):",
+                  "c2": "Tổng cộng (3):",
+                  "c3": "Tổng cộng (3):",
+                  "c4": "Tổng cộng (3):",
+                  "c5": "Tổng cộng (3):",
+                  "c6": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c6",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  },
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group3"
+            },
+            {
+              "title": "Học kỳ II - Đào tạo hệ đóng học phí (ghi rõ đối tượng cho từng lớp)",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "Tổng cộng (4):",
+                "values": {
+                  "c1": "Tổng cộng (4):",
+                  "c2": "Tổng cộng (4):",
+                  "c3": "Tổng cộng (4):",
+                  "c4": "Tổng cộng (4):",
+                  "c5": "Tổng cộng (4):",
+                  "c6": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c6",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  },
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group4"
+            }
+          ],
+          "summaryRows": [
+            {
+              "label": "Tổng A.1= (1) + (2) + (3) + (4)",
+              "values": {
+                "c1": "Tổng A.1= (1) + (2) + (3) + (4)",
+                "c2": "Tổng A.1= (1) + (2) + (3) + (4)",
+                "c3": "Tổng A.1= (1) + (2) + (3) + (4)",
+                "c4": "Tổng A.1= (1) + (2) + (3) + (4)",
+                "c5": "Tổng A.1= (1) + (2) + (3) + (4)",
+                "c6": {
+                  "formula": {
+                    "type": "excel",
+                    "template": "{a1.group4.total.c6}+{a1.group3.total.c6}+{a1.group2.total.c6}+{a1.group1.total.c6}"
+                  }
+                },
+                "c7": {
+                  "formula": {
+                    "type": "excel",
+                    "template": "{a1.group4.total.c7}+{a1.group3.total.c7}+{a1.group2.total.c7}+{a1.group1.total.c7}"
+                  }
+                }
+              },
+              "id": "summary1"
+            }
+          ],
+          "id": "a1.block1"
+        }
+      ],
+      "id": "a1"
+    },
+    {
+      "title": "A.2. Đánh giá kết thúc học phần (theo tổng hợp của phòng Khảo thí và đảm bảo chất lượng)",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Tên học phần"
+            },
+            {
+              "key": "c3",
+              "name": "Ra đề/ Coi thi/ Chấm thi kết thúc học phần"
+            },
+            {
+              "key": "c4",
+              "name": "Lớp học phần"
+            },
+            {
+              "key": "c5",
+              "name": "Đối tượng\n(Lào, Cuba, Campuchia, Việt Nam, Đóng HP)"
+            },
+            {
+              "key": "c6",
+              "name": "Số sinh viên của lớp"
+            },
+            {
+              "key": "c7",
+              "name": "Số tiết ra đề/ Coi thi/ Chấm thi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "Học kỳ I - Đào tạo chuyên ngành Kỹ thuật mật mã (ghi rõ đối tượng cho từng lớp)",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "Tổng cộng (5):",
+                "values": {
+                  "c1": "Tổng cộng (5):",
+                  "c2": "Tổng cộng (5):",
+                  "c3": "Tổng cộng (5):",
+                  "c4": "Tổng cộng (5):",
+                  "c5": "Tổng cộng (5):",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            },
+            {
+              "title": "Học kỳ I - Đào tạo hệ đóng học phí (ghi rõ đối tượng cho từng lớp)",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "Tổng cộng (6):",
+                "values": {
+                  "c1": "Tổng cộng (6):",
+                  "c2": "Tổng cộng (6):",
+                  "c3": "Tổng cộng (6):",
+                  "c4": "Tổng cộng (6):",
+                  "c5": "Tổng cộng (6):",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group2"
+            },
+            {
+              "title": "Học kỳ II - Đào tạo chuyên ngành Kỹ thuật mật mã (ghi rõ đối tượng cho từng lớp)",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "Tổng cộng (7):",
+                "values": {
+                  "c1": "Tổng cộng (7):",
+                  "c2": "Tổng cộng (7):",
+                  "c3": "Tổng cộng (7):",
+                  "c4": "Tổng cộng (7):",
+                  "c5": "Tổng cộng (7):",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group3"
+            },
+            {
+              "title": "Học kỳ II - Đào tạo hệ đóng học phí (ghi rõ đối tượng cho từng lớp)",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "Tổng cộng (8):",
+                "values": {
+                  "c1": "Tổng cộng (8):",
+                  "c2": "Tổng cộng (8):",
+                  "c3": "Tổng cộng (8):",
+                  "c4": "Tổng cộng (8):",
+                  "c5": "Tổng cộng (8):",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group4"
+            }
+          ],
+          "summaryRows": [
+            {
+              "label": "Tổng A.2= (5) + (6) + (7) + (8)",
+              "values": {
+                "c1": "Tổng A.2= (5) + (6) + (7) + (8)",
+                "c2": "Tổng A.2= (5) + (6) + (7) + (8)",
+                "c3": "Tổng A.2= (5) + (6) + (7) + (8)",
+                "c4": "Tổng A.2= (5) + (6) + (7) + (8)",
+                "c5": "Tổng A.2= (5) + (6) + (7) + (8)",
+                "c7": {
+                  "formula": {
+                    "type": "excel",
+                    "template": "{a2.group4.total.c7}+{a2.group3.total.c7}+{a2.group2.total.c7}+{a2.group1.total.c7}"
+                  }
+                }
+              },
+              "id": "summary1"
+            },
+            {
+              "label": "TỔNG A = A.1 + A.2",
+              "values": {
+                "c1": "TỔNG A = A.1 + A.2",
+                "c2": "TỔNG A = A.1 + A.2",
+                "c3": "TỔNG A = A.1 + A.2",
+                "c4": "TỔNG A = A.1 + A.2",
+                "c5": "TỔNG A = A.1 + A.2",
+                "c7": {
+                  "formula": {
+                    "type": "excel",
+                    "template": "{a2.a2.block1.summary1.c7}+{a1.a1.block1.summary1.c7}"
+                  }
+                }
+              },
+              "id": "summary2"
+            }
+          ],
+          "id": "a2.block1"
+        }
+      ],
+      "id": "a2"
+    },
+    {
+      "title": "B. HƯỚNG DẪN LUẬN ÁN, LUẬN VĂN, ĐỒ ÁN TỐT NGHIỆP",
+      "blocks": [],
+      "id": "b"
+    },
+    {
+      "title": "B.1. Hướng dẫn cho sinh viên Mật mã đối tượng Việt Nam",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Họ tên NCS, Học viên, Sinh viên"
+            },
+            {
+              "key": "c3",
+              "name": "Khóa đào tạo"
+            },
+            {
+              "key": "c4",
+              "name": "Số QĐ Giao Luận án, Luận văn, đồ án"
+            },
+            {
+              "key": "c5",
+              "name": "Số người HD"
+            },
+            {
+              "key": "c6",
+              "name": "HD chính/ HD hai"
+            },
+            {
+              "key": "c7",
+              "name": "Số tiết quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "TỔNG B.1:",
+                "values": {
+                  "c1": "TỔNG B.1:",
+                  "c2": "TỔNG B.1:",
+                  "c3": "TỔNG B.1:",
+                  "c4": "TỔNG B.1:",
+                  "c5": "TỔNG B.1:",
+                  "c6": "TỔNG B.1:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "b1.block1"
+        }
+      ],
+      "id": "b1"
+    },
+    {
+      "title": "B.2. Hướng dẫn cho sinh viên Mật mã đối tượng Lào",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Họ tên NCS, Học viên, Sinh viên"
+            },
+            {
+              "key": "c3",
+              "name": "Khóa đào tạo"
+            },
+            {
+              "key": "c4",
+              "name": "Số QĐ Giao Luận án, Luận văn, đồ án"
+            },
+            {
+              "key": "c5",
+              "name": "Số người HD"
+            },
+            {
+              "key": "c6",
+              "name": "HD chính/ HD hai"
+            },
+            {
+              "key": "c7",
+              "name": "Số tiết quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1,
+                    "c2": "Phanla Thepphavong",
+                    "c3": "CNTT Lào",
+                    "c5": 1,
+                    "c6": "HD Chính",
+                    "c7": 20
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "TỔNG B.3:",
+                "values": {
+                  "c1": "TỔNG B.3:",
+                  "c2": "TỔNG B.3:",
+                  "c3": "TỔNG B.3:",
+                  "c4": "TỔNG B.3:",
+                  "c5": "TỔNG B.3:",
+                  "c6": "TỔNG B.3:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "b2.block1"
+        }
+      ],
+      "id": "b2"
+    },
+    {
+      "title": "B.3. Hướng dẫn cho sinh viên Mật mã đối tượng Cuba",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Họ tên NCS, Học viên, Sinh viên"
+            },
+            {
+              "key": "c3",
+              "name": "Khóa đào tạo"
+            },
+            {
+              "key": "c4",
+              "name": "Số QĐ Giao Luận án, Luận văn, đồ án"
+            },
+            {
+              "key": "c5",
+              "name": "Số người HD"
+            },
+            {
+              "key": "c6",
+              "name": "HD chính/ HD hai"
+            },
+            {
+              "key": "c7",
+              "name": "Số tiết quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "TỔNG B.3:",
+                "values": {
+                  "c1": "TỔNG B.3:",
+                  "c2": "TỔNG B.3:",
+                  "c3": "TỔNG B.3:",
+                  "c4": "TỔNG B.3:",
+                  "c5": "TỔNG B.3:",
+                  "c6": "TỔNG B.3:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "b3.block1"
+        }
+      ],
+      "id": "b3"
+    },
+    {
+      "title": "B.4. Hướng dẫn cho sinh viên Mật mã đối tượng Campuchia",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Họ tên NCS, Học viên, Sinh viên"
+            },
+            {
+              "key": "c3",
+              "name": "Khóa đào tạo"
+            },
+            {
+              "key": "c4",
+              "name": "Số QĐ Giao Luận án, Luận văn, đồ án"
+            },
+            {
+              "key": "c5",
+              "name": "Số người HD"
+            },
+            {
+              "key": "c6",
+              "name": "HD chính/ HD hai"
+            },
+            {
+              "key": "c7",
+              "name": "Số tiết quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "TỔNG B.4:",
+                "values": {
+                  "c1": "TỔNG B.4:",
+                  "c2": "TỔNG B.4:",
+                  "c3": "TỔNG B.4:",
+                  "c4": "TỔNG B.4:",
+                  "c5": "TỔNG B.4:",
+                  "c6": "TỔNG B.4:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "b4.block1"
+        }
+      ],
+      "id": "b4"
+    },
+    {
+      "title": "B.5. Hướng dẫn cho sinh viên hệ đóng học phí",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Họ tên NCS, Học viên, Sinh viên"
+            },
+            {
+              "key": "c3",
+              "name": "Khóa đào tạo"
+            },
+            {
+              "key": "c4",
+              "name": "Số QĐ Giao Luận án, Luận văn, đồ án"
+            },
+            {
+              "key": "c5",
+              "name": "Số người HD"
+            },
+            {
+              "key": "c6",
+              "name": "HD chính/ HD hai"
+            },
+            {
+              "key": "c7",
+              "name": "Số tiết quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1,
+                    "c2": "Nguyễn Tùng Dương",
+                    "c3": "CT6",
+                    "c5": 2,
+                    "c6": "HD hai",
+                    "c7": 12
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2,
+                    "c2": "Đoàn Minh Phương",
+                    "c3": "CT6",
+                    "c5": 2,
+                    "c6": "HD hai",
+                    "c7": 12
+                  },
+                  "id": "item2"
+                },
+                {
+                  "values": {
+                    "c1": 3,
+                    "c2": "Bùi Đức Trọng",
+                    "c3": "CT6",
+                    "c5": 2,
+                    "c6": "HD hai",
+                    "c7": 12
+                  },
+                  "id": "item3"
+                },
+                {
+                  "values": {
+                    "c1": 4,
+                    "c2": "Nguyễn Quang Tùng",
+                    "c3": "CT6",
+                    "c5": 2,
+                    "c6": "HD hai",
+                    "c7": 12
+                  },
+                  "id": "item4"
+                },
+                {
+                  "values": {
+                    "c1": 5,
+                    "c2": "Nguyễn Thị Hồng Ngân",
+                    "c3": "CT6",
+                    "c5": 2,
+                    "c6": "HD hai",
+                    "c7": 12
+                  },
+                  "id": "item5"
+                },
+                {
+                  "values": {
+                    "c1": 6,
+                    "c2": "Thân Nhân Chính",
+                    "c3": "CT6",
+                    "c5": 2,
+                    "c6": "HD hai",
+                    "c7": 12
+                  },
+                  "id": "item6"
+                },
+                {
+                  "values": {
+                    "c1": 7,
+                    "c2": "Đỗ Mạnh Nghĩa",
+                    "c3": "CT6",
+                    "c5": 2,
+                    "c6": "HD hai",
+                    "c7": 12
+                  },
+                  "id": "item7"
+                },
+                {
+                  "values": {
+                    "c1": 8,
+                    "c2": "Nguyễn Văn Phú Thịnh",
+                    "c3": "CT6",
+                    "c5": 2,
+                    "c6": "HD hai",
+                    "c7": 8
+                  },
+                  "id": "item8"
+                },
+                {
+                  "values": {
+                    "c1": 9,
+                    "c2": "Đinh Bảo Sơn",
+                    "c3": "CT6",
+                    "c5": 2,
+                    "c6": "HD hai",
+                    "c7": 8
+                  },
+                  "id": "item9"
+                }
+              ],
+              "total": {
+                "label": "TỔNG B.5:",
+                "values": {
+                  "c1": "TỔNG B.5:",
+                  "c2": "TỔNG B.5:",
+                  "c3": "TỔNG B.5:",
+                  "c4": "TỔNG B.5:",
+                  "c5": "TỔNG B.5:",
+                  "c6": "TỔNG B.5:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [
+            {
+              "label": "TỔNG B = B.1 + B.2 + B.3 + B.4 + B.5",
+              "values": {
+                "c1": "TỔNG B = B.1 + B.2 + B.3 + B.4 + B.5",
+                "c2": "TỔNG B = B.1 + B.2 + B.3 + B.4 + B.5",
+                "c3": "TỔNG B = B.1 + B.2 + B.3 + B.4 + B.5",
+                "c4": "TỔNG B = B.1 + B.2 + B.3 + B.4 + B.5",
+                "c5": "TỔNG B = B.1 + B.2 + B.3 + B.4 + B.5",
+                "c6": "TỔNG B = B.1 + B.2 + B.3 + B.4 + B.5",
+                "c7": {
+                  "formula": {
+                    "type": "excel",
+                    "template": "{b1.group1.total.c7}+{b2.group1.total.c7}+{b3.group1.total.c7}+{b4.group1.total.c7}+{b5.group1.total.c7}"
+                  }
+                }
+              },
+              "id": "summary1"
+            }
+          ],
+          "id": "b5.block1"
+        }
+      ],
+      "id": "b5"
+    },
+    {
+      "title": "C. HƯỚNG DẪN THAM QUAN THỰC TẾ CỦA HỌC VIÊN, SINH VIÊN",
+      "blocks": [],
+      "id": "c"
+    },
+    {
+      "title": "C.1. Hướng dẫn cho sinh viên Mật mã đối tượng Việt Nam",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Mô tả hoạt động"
+            },
+            {
+              "key": "c3",
+              "name": "Khóa đào tạo"
+            },
+            {
+              "key": "c4",
+              "name": "Theo QĐ"
+            },
+            {
+              "key": "c5",
+              "name": "Số ngày"
+            },
+            {
+              "key": "c6",
+              "name": "Số ngày"
+            },
+            {
+              "key": "c7",
+              "name": "Số tiết quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "TỔNG C.1:",
+                "values": {
+                  "c1": "TỔNG C.1:",
+                  "c2": "TỔNG C.1:",
+                  "c3": "TỔNG C.1:",
+                  "c4": "TỔNG C.1:",
+                  "c5": "TỔNG C.1:",
+                  "c6": "TỔNG C.1:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "c1.block1"
+        }
+      ],
+      "id": "c1"
+    },
+    {
+      "title": "C.2. Hướng dẫn cho sinh viên Mật mã đối tượng Lào",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Mô tả hoạt động"
+            },
+            {
+              "key": "c3",
+              "name": "Khóa đào tạo"
+            },
+            {
+              "key": "c4",
+              "name": "Theo QĐ"
+            },
+            {
+              "key": "c5",
+              "name": "Số ngày"
+            },
+            {
+              "key": "c6",
+              "name": "Số ngày"
+            },
+            {
+              "key": "c7",
+              "name": "Số tiết quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "TỔNG C.2:",
+                "values": {
+                  "c1": "TỔNG C.2:",
+                  "c2": "TỔNG C.2:",
+                  "c3": "TỔNG C.2:",
+                  "c4": "TỔNG C.2:",
+                  "c5": "TỔNG C.2:",
+                  "c6": "TỔNG C.2:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "c2.block1"
+        }
+      ],
+      "id": "c2"
+    },
+    {
+      "title": "C.3. Hướng dẫn cho sinh viên Mật mã đối tượng Cuba",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Mô tả hoạt động"
+            },
+            {
+              "key": "c3",
+              "name": "Khóa đào tạo"
+            },
+            {
+              "key": "c4",
+              "name": "Theo QĐ"
+            },
+            {
+              "key": "c5",
+              "name": "Số ngày"
+            },
+            {
+              "key": "c6",
+              "name": "Số ngày"
+            },
+            {
+              "key": "c7",
+              "name": "Số tiết quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "TỔNG C.3:",
+                "values": {
+                  "c1": "TỔNG C.3:",
+                  "c2": "TỔNG C.3:",
+                  "c3": "TỔNG C.3:",
+                  "c4": "TỔNG C.3:",
+                  "c5": "TỔNG C.3:",
+                  "c6": "TỔNG C.3:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "c3.block1"
+        }
+      ],
+      "id": "c3"
+    },
+    {
+      "title": "C.4. Hướng dẫn cho sinh viên Mật mã đối tượng Campuchia",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Mô tả hoạt động"
+            },
+            {
+              "key": "c3",
+              "name": "Khóa đào tạo"
+            },
+            {
+              "key": "c4",
+              "name": "Theo QĐ"
+            },
+            {
+              "key": "c5",
+              "name": "Số ngày"
+            },
+            {
+              "key": "c6",
+              "name": "Số ngày"
+            },
+            {
+              "key": "c7",
+              "name": "Số tiết quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "TỔNG C.4:",
+                "values": {
+                  "c1": "TỔNG C.4:",
+                  "c2": "TỔNG C.4:",
+                  "c3": "TỔNG C.4:",
+                  "c4": "TỔNG C.4:",
+                  "c5": "TỔNG C.4:",
+                  "c6": "TỔNG C.4:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "c4.block1"
+        }
+      ],
+      "id": "c4"
+    },
+    {
+      "title": "C.5. Hướng dẫn cho sinh viên Mật mã đối tượng Đóng học phí",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Mô tả hoạt động"
+            },
+            {
+              "key": "c3",
+              "name": "Khóa đào tạo"
+            },
+            {
+              "key": "c4",
+              "name": "Theo QĐ"
+            },
+            {
+              "key": "c5",
+              "name": "Số ngày"
+            },
+            {
+              "key": "c6",
+              "name": "Số ngày"
+            },
+            {
+              "key": "c7",
+              "name": "Số tiết quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "TỔNG C.5:",
+                "values": {
+                  "c1": "TỔNG C.5:",
+                  "c2": "TỔNG C.5:",
+                  "c3": "TỔNG C.5:",
+                  "c4": "TỔNG C.5:",
+                  "c5": "TỔNG C.5:",
+                  "c6": "TỔNG C.5:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [
+            {
+              "label": "TỔNG C = C.1 + C.2 + C.3 + C.4 + C.5",
+              "values": {
+                "c1": "TỔNG C = C.1 + C.2 + C.3 + C.4 + C.5",
+                "c2": "TỔNG C = C.1 + C.2 + C.3 + C.4 + C.5",
+                "c3": "TỔNG C = C.1 + C.2 + C.3 + C.4 + C.5",
+                "c4": "TỔNG C = C.1 + C.2 + C.3 + C.4 + C.5",
+                "c5": "TỔNG C = C.1 + C.2 + C.3 + C.4 + C.5",
+                "c6": "TỔNG C = C.1 + C.2 + C.3 + C.4 + C.5",
+                "c7": {
+                  "formula": {
+                    "type": "excel",
+                    "template": "{c1.group1.total.c7}+{c2.group1.total.c7}+{c3.group1.total.c7}+{c4.group1.total.c7}+{c5.group1.total.c7}"
+                  }
+                }
+              },
+              "id": "summary1"
+            },
+            {
+              "label": "TỔNG A + B+C:",
+              "values": {
+                "c1": "TỔNG A + B+C:",
+                "c2": "TỔNG A + B+C:",
+                "c3": "TỔNG A + B+C:",
+                "c4": "TỔNG A + B+C:",
+                "c5": "TỔNG A + B+C:",
+                "c6": "TỔNG A + B+C:",
+                "c7": {
+                  "formula": {
+                    "type": "excel",
+                    "template": "{a2.a2.block1.summary2.c7}+{b5.b5.block1.summary1.c7}+{c5.c5.block1.summary1.c7}"
+                  }
+                }
+              },
+              "id": "summary2"
+            }
+          ],
+          "id": "c5.block1"
+        }
+      ],
+      "id": "c5"
+    },
+    {
+      "title": "D. NGHIÊN CỨU KHOA HỌC",
+      "blocks": [],
+      "id": "d"
+    },
+    {
+      "title": "D.1 Đề tài, dự án",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Tên đề tài, dự án (mã số đề tài, dự án)"
+            },
+            {
+              "key": "c3",
+              "name": "Chủ trì/ thành viên"
+            },
+            {
+              "key": "c4",
+              "name": "Cấp đề tài (Quốc gia, nghị định thư; Ban, bộ; Cơ sở do lãnh đạo Ban CY phê duyệt, cơ sở do giám đốc HV phê duyệt)"
+            },
+            {
+              "key": "c5",
+              "name": "Ngày nghiệm thu"
+            },
+            {
+              "key": "c6",
+              "name": "Kết quả xếp loại "
+            },
+            {
+              "key": "c7",
+              "name": "Số giờ \nquy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1,
+                    "c2": "Nghiên cứu, thử nghiệm mô hình thư ký ảo sử dụng ASR cho ứng dụng phòng họp trực tuyến  (Mã số: 10/2025/CS)",
+                    "c3": "Chủ trì",
+                    "c4": "Cấp Cơ sở do LĐ Ban CY phê duyệt",
+                    "c5": "26/11/2025",
+                    "c6": "Đạt",
+                    "c7": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "600/2"
+                      }
+                    }
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2,
+                    "c2": "Xây dựng hệ thống hỗ trợ quản lý đào tạo tại Học viện Kỹ thuật mật mã (Mã số: 19/2025/CS)",
+                    "c3": "Thành viên",
+                    "c4": "Cấp Cơ sở do LĐ Ban CY phê duyệt",
+                    "c5": "28/11/2025",
+                    "c6": "Đạt",
+                    "c7": 100
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "Tổng D.1:",
+                "values": {
+                  "c1": "Tổng D.1:",
+                  "c2": "Tổng D.1:",
+                  "c3": "Tổng D.1:",
+                  "c4": "Tổng D.1:",
+                  "c5": "Tổng D.1:",
+                  "c6": "Tổng D.1:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "d1.block1"
+        }
+      ],
+      "id": "d1"
+    },
+    {
+      "title": "D.2 Sáng kiến",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Tên sáng kiến (mã số sáng kiến nếu có)"
+            },
+            {
+              "key": "c3",
+              "name": "Chủ trì/ thành viên"
+            },
+            {
+              "key": "c4",
+              "name": "Sáng kiến (cấp Quốc gia; cấp Ban, Bộ; lãnh đạo Ban CY phê duyệt, giám đốc HV phê duyệt)"
+            },
+            {
+              "key": "c5",
+              "name": "Ngày nghiệm thu"
+            },
+            {
+              "key": "c6",
+              "name": "Kết quả xếp loại "
+            },
+            {
+              "key": "c7",
+              "name": "Số giờ \nquy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "Tổng D.2:",
+                "values": {
+                  "c1": "Tổng D.2:",
+                  "c2": "Tổng D.2:",
+                  "c3": "Tổng D.2:",
+                  "c4": "Tổng D.2:",
+                  "c5": "Tổng D.2:",
+                  "c6": "Tổng D.2:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "d2.block1"
+        }
+      ],
+      "id": "d2"
+    },
+    {
+      "title": "D.3 Giải thưởng khoa học và công nghệ; Bằng sáng chế, giải pháp hữu ích",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Tên giải pháp khoa học, giải thưởng; Bằng sáng chế"
+            },
+            {
+              "key": "c3",
+              "name": "Số QĐ công nhận"
+            },
+            {
+              "key": "c4",
+              "name": "Ngày QĐ công nhận"
+            },
+            {
+              "key": "c5",
+              "name": "Số người"
+            },
+            {
+              "key": "c6",
+              "name": "Tác giả chính/ thành viên"
+            },
+            {
+              "key": "c7",
+              "name": "Số giờ quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "Tổng D.3:",
+                "values": {
+                  "c1": "Tổng D.3:",
+                  "c2": "Tổng D.3:",
+                  "c3": "Tổng D.3:",
+                  "c4": "Tổng D.3:",
+                  "c5": "Tổng D.3:",
+                  "c6": "Tổng D.3:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "d3.block1"
+        }
+      ],
+      "id": "d3"
+    },
+    {
+      "title": "D.4 Đề xuất nghiên cứu (theo đúng mẫu đề xuất quy định)",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Tên đề xuất (mã số nếu có)"
+            },
+            {
+              "key": "c3",
+              "name": "Chủ trì/ thành viên"
+            },
+            {
+              "key": "c4",
+              "name": "Cấp quốc gia, quốc tế; cấp Bộ và tương đương; cấp cơ sở"
+            },
+            {
+              "key": "c5",
+              "name": "Ngày nghiệm thu"
+            },
+            {
+              "key": "c6",
+              "name": "Kết quả xếp loại "
+            },
+            {
+              "key": "c7",
+              "name": "Số giờ \nquy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "Tổng D.4:",
+                "values": {
+                  "c1": "Tổng D.4:",
+                  "c2": "Tổng D.4:",
+                  "c3": "Tổng D.4:",
+                  "c4": "Tổng D.4:",
+                  "c5": "Tổng D.4:",
+                  "c6": "Tổng D.4:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "d4.block1"
+        }
+      ],
+      "id": "d4"
+    },
+    {
+      "title": "D.5 Sách, giáo trình, tài liệu dạy học, tài liệu huấn luyện, điều lệ, điều lệnh",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Tên sách, giáo trình"
+            },
+            {
+              "key": "c3",
+              "name": "Số xuất bản"
+            },
+            {
+              "key": "c4",
+              "name": "Số trang"
+            },
+            {
+              "key": "c5",
+              "name": "Số người"
+            },
+            {
+              "key": "c6",
+              "name": "Tác giả chính/ thành viên"
+            },
+            {
+              "key": "c7",
+              "name": "Số giờ quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "Tổng D.5:",
+                "values": {
+                  "c1": "Tổng D.5:",
+                  "c2": "Tổng D.5:",
+                  "c3": "Tổng D.5:",
+                  "c4": "Tổng D.5:",
+                  "c5": "Tổng D.5:",
+                  "c6": "Tổng D.5:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "d5.block1"
+        }
+      ],
+      "id": "d5"
+    },
+    {
+      "title": "D.6 Bài báo, báo cáo khoa học",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Tên bài báo"
+            },
+            {
+              "key": "c3",
+              "name": "Loại tạp chí/ hội nghị"
+            },
+            {
+              "key": "c4",
+              "name": "Chỉ số tạp chí/ hội nghị"
+            },
+            {
+              "key": "c5",
+              "name": "Số người"
+            },
+            {
+              "key": "c6",
+              "name": "Tác giả chính/ thành viên"
+            },
+            {
+              "key": "c7",
+              "name": "Số giờ quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1,
+                    "c2": "Android Malware Classification Based on Graph Features and Deep Learning Models",
+                    "c3": "Hội nghị",
+                    "c4": "Hội nghị Quốc tế",
+                    "c5": 3,
+                    "c6": "Tác giả chính chịu trách nhiệm",
+                    "c7": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "TRUNC(220/2,2)"
+                      }
+                    }
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2,
+                    "c2": "Tinh chỉnh mô hình nhận dạng tiếng Việt và ứng dụng trong hệ thống phòng họp trực tuyến",
+                    "c3": "Hội nghị",
+                    "c4": "Hội nghị trong nước",
+                    "c5": 5,
+                    "c6": "Tác giả chính chịu trách nhiệm",
+                    "c7": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "TRUNC(150/3+150*2/3/5,2)"
+                      }
+                    }
+                  },
+                  "id": "item2"
+                },
+                {
+                  "values": {
+                    "c1": 3,
+                    "c2": "Developing a Virtual Assistant for Exam Score Retrieval Using a Local LLM",
+                    "c3": "Hội nghị",
+                    "c4": "Hội nghị trong nước",
+                    "c5": 4,
+                    "c6": "Tác giả chính",
+                    "c7": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "TRUNC(150/3/2+150*2/3/4,2)"
+                      }
+                    }
+                  },
+                  "id": "item3"
+                },
+                {
+                  "values": {
+                    "c1": 4,
+                    "c2": "YOLO-TrOCR: A Proposed Model for Automated Ballot Counting",
+                    "c3": "Hội nghị",
+                    "c4": "Hội nghị Quốc tế",
+                    "c5": 3,
+                    "c6": "Tác giả chính chịu trách nhiệm",
+                    "c7": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "TRUNC(220/2,2)"
+                      }
+                    }
+                  },
+                  "id": "item4"
+                },
+                {
+                  "values": {
+                    "c1": 5,
+                    "c2": "An Overall Optimization Model Using Metaheuristic Algorithms for the CNN-based IoT Attack Detection Problem",
+                    "c3": "Tạp chí",
+                    "c4": "Tạp chí Q3",
+                    "c5": 4,
+                    "c6": "Thành viên",
+                    "c7": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "TRUNC((400*2/3)/4,2)"
+                      }
+                    }
+                  },
+                  "id": "item5"
+                }
+              ],
+              "total": {
+                "label": "Tổng D.6:",
+                "values": {
+                  "c1": "Tổng D.6:",
+                  "c2": "Tổng D.6:",
+                  "c3": "Tổng D.6:",
+                  "c4": "Tổng D.6:",
+                  "c5": "Tổng D.6:",
+                  "c6": "Tổng D.6:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7",
+                      "round": {
+                        "fn": "TRUNC",
+                        "digits": 2
+                      }
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "d6.block1"
+        }
+      ],
+      "id": "d6"
+    },
+    {
+      "title": "D.7 Hướng dẫn học viên, sinh viên NCKH do GĐ Học viện phê duyệt",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Tên đề tài"
+            },
+            {
+              "key": "c3",
+              "name": "Số QĐ giao nhiệm vụ"
+            },
+            {
+              "key": "c4",
+              "name": "Ngày ký QĐ giao nhiệm vụ"
+            },
+            {
+              "key": "c5",
+              "name": "Kết quả bảo vệ cấp Khoa "
+            },
+            {
+              "key": "c6",
+              "name": "Kết quả bảo vệ cấp Học viện"
+            },
+            {
+              "key": "c7",
+              "name": "Số giờ quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1,
+                    "c2": "Nghiên cứu, xây dựng hệ thống Chatbox ứng dụng mô hình RAG và LLMs",
+                    "c4": "9/9/2025",
+                    "c5": "khá",
+                    "c7": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "10/2"
+                      }
+                    }
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2,
+                    "c2": "Nghiên cứu kỹ thuật tóm tắt văn bản, ứng trong hệ thống thư ký ảo trực tuyến",
+                    "c4": "9/9/2025",
+                    "c5": "khá",
+                    "c7": 5
+                  },
+                  "id": "item2"
+                },
+                {
+                  "values": {
+                    "c1": 3,
+                    "c2": "Nghiên cứu, xây dựng ứng dụng kiểm đếm phiếu bầu tự động sử dụng mô hình Deeplearning và Transformer",
+                    "c4": "9/9/2025",
+                    "c5": "khá",
+                    "c7": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "10/2"
+                      }
+                    }
+                  },
+                  "id": "item3"
+                }
+              ],
+              "total": {
+                "label": "Tổng D.7:",
+                "values": {
+                  "c1": "Tổng D.7:",
+                  "c2": "Tổng D.7:",
+                  "c3": "Tổng D.7:",
+                  "c4": "Tổng D.7:",
+                  "c5": "Tổng D.7:",
+                  "c6": "Tổng D.7:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7"
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "d7.block1"
+        }
+      ],
+      "id": "d7"
+    },
+    {
+      "title": "D.8 Thành viên hội đồng khoa học các cấp",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Tên hội đồng khoa học"
+            },
+            {
+              "key": "c3",
+              "name": "Hội đồng cấp (chương trình KHCN, đề án, dự án KHCN các cấp; xét duyệt nghiệm thu đề tài, sáng kiến do LĐ Ban CY duyệt; nghiệm thu 01 đề tài, sáng kiến, giáo trình, tài liệu dạy học do LĐ Học viện duyệt; xét duyệt 01 đề cương đề tài, sáng kiến, giáo trình, tài liệu dạy học do LĐ Học viện duyệt)"
+            },
+            {
+              "key": "c4",
+              "name": "Hội đồng cấp (chương trình KHCN, đề án, dự án KHCN các cấp; xét duyệt nghiệm thu đề tài, sáng kiến do LĐ Ban CY duyệt; nghiệm thu 01 đề tài, sáng kiến, giáo trình, tài liệu dạy học do LĐ Học viện duyệt; xét duyệt 01 đề cương đề tài, sáng kiến, giáo trình, tài liệu dạy học do LĐ Học viện duyệt)"
+            },
+            {
+              "key": "c5",
+              "name": "Chức danh (chủ tịch, phản biện, ủy viên)"
+            },
+            {
+              "key": "c6",
+              "name": "Số QĐ giao nhiệm vụ, ngày ký QĐ"
+            },
+            {
+              "key": "c7",
+              "name": "Số giờ quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                }
+              ],
+              "total": {
+                "label": "Tổng D.8:",
+                "values": {
+                  "c1": "Tổng D.8:",
+                  "c2": "Tổng D.8:",
+                  "c3": "Tổng D.8:",
+                  "c4": "Tổng D.8:",
+                  "c5": "Tổng D.8:",
+                  "c6": "Tổng D.8:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7"
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "d8.block1"
+        }
+      ],
+      "id": "d8"
+    },
+    {
+      "title": "D.9 Các nhiệm vụ khoa học và công nghệ khác",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Tên nhiệm vụ"
+            },
+            {
+              "key": "c3",
+              "name": "Số QĐ giao nhiệm vụ, ngày ký"
+            },
+            {
+              "key": "c4",
+              "name": "Số QĐ giao nhiệm vụ, ngày ký"
+            },
+            {
+              "key": "c5",
+              "name": "Nghiệm vụ được phân công theo quyết định"
+            },
+            {
+              "key": "c6",
+              "name": "Nghiệm vụ được phân công theo quyết định"
+            },
+            {
+              "key": "c7",
+              "name": "Số giờ quy đổi"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2
+                  },
+                  "id": "item2"
+                },
+                {
+                  "values": {},
+                  "id": "item3"
+                },
+                {
+                  "values": {},
+                  "id": "item4"
+                }
+              ],
+              "total": {
+                "label": "Tổng D.9:",
+                "values": {
+                  "c1": "Tổng D.9:",
+                  "c2": "Tổng D.9:",
+                  "c3": "Tổng D.9:",
+                  "c4": "Tổng D.9:",
+                  "c5": "Tổng D.9:",
+                  "c6": "Tổng D.9:",
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7"
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [
+            {
+              "label": "Tổng D = D.1+D.2+D.3+D.4+D.5+D.6+D.7 + D.8 + D.9",
+              "values": {
+                "c1": "Tổng D = D.1+D.2+D.3+D.4+D.5+D.6+D.7 + D.8 + D.9",
+                "c2": "Tổng D = D.1+D.2+D.3+D.4+D.5+D.6+D.7 + D.8 + D.9",
+                "c3": "Tổng D = D.1+D.2+D.3+D.4+D.5+D.6+D.7 + D.8 + D.9",
+                "c4": "Tổng D = D.1+D.2+D.3+D.4+D.5+D.6+D.7 + D.8 + D.9",
+                "c5": "Tổng D = D.1+D.2+D.3+D.4+D.5+D.6+D.7 + D.8 + D.9",
+                "c6": {
+                  "formula": {
+                    "type": "excel",
+                    "template": "TRUNC({d1.group1.total.c7}+{d2.group1.total.c7}+{d3.group1.total.c7}+{d4.group1.total.c7}+{d5.group1.total.c7}+{d6.group1.total.c7}+{d7.group1.total.c7}+{d8.group1.total.c7}+{d9.group1.total.c7},2)"
+                  }
+                },
+                "c7": "[object Object]"
+              },
+              "id": "summary1"
+            }
+          ],
+          "id": "d9.block1"
+        }
+      ],
+      "id": "d9"
+    },
+    {
+      "title": "E. TỔNG HỢP KHỐI LƯỢNG ĐÃ THỰC HIỆN VÀ ĐỀ NGHỊ THANH TOÁN VƯỢT GIỜ",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Nội dung công việc"
+            },
+            {
+              "key": "c3",
+              "name": "Nội dung công việc"
+            },
+            {
+              "key": "c4",
+              "name": "Nội dung công việc"
+            },
+            {
+              "key": "c5",
+              "name": "Số tiết"
+            },
+            {
+              "key": "c6",
+              "name": "Lý do giảm trừ \ntại mục IV"
+            },
+            {
+              "key": "c7",
+              "name": "Lý do giảm trừ \ntại mục IV"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": "I",
+                    "c2": "Tổng số tiết thực hiện (A + B+C)",
+                    "c3": "Tổng số tiết thực hiện (A + B+C)",
+                    "c4": "Tổng số tiết thực hiện (A + B+C)",
+                    "c5": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "{c5.c5.block1.summary2.c7}"
+                      }
+                    }
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": "II",
+                    "c2": "Số tiết định mức phải giảng (280 tiết)",
+                    "c3": "Số tiết định mức phải giảng (280 tiết)",
+                    "c4": "Số tiết định mức phải giảng (280 tiết)",
+                    "c5": 280
+                  },
+                  "id": "item2"
+                },
+                {
+                  "values": {
+                    "c1": "III",
+                    "c2": "Số tiết chưa hoàn thành NCKH (định mức NCKH: 200 tiết QC)",
+                    "c3": "Số tiết chưa hoàn thành NCKH (định mức NCKH: 200 tiết QC)",
+                    "c4": "Số tiết chưa hoàn thành NCKH (định mức NCKH: 200 tiết QC)",
+                    "c5": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "IF({d9.d9.block1.summary1.c6}>=200,0,200-{d9.d9.block1.summary1.c6})"
+                      }
+                    }
+                  },
+                  "id": "item3"
+                },
+                {
+                  "values": {
+                    "c1": "IV",
+                    "c2": "Số tiết được giảm trừ (theo lý do giảm trừ)",
+                    "c3": "Số tiết được giảm trừ (theo lý do giảm trừ)",
+                    "c4": "Số tiết được giảm trừ (theo lý do giảm trừ)",
+                    "c5": 0
+                  },
+                  "id": "item4"
+                },
+                {
+                  "values": {
+                    "c1": "V",
+                    "c2": "Tổng số tiết vượt giờ  (I - II - III + IV)",
+                    "c3": "Tổng số tiết vượt giờ  (I - II - III + IV)",
+                    "c4": "Tổng số tiết vượt giờ  (I - II - III + IV)",
+                    "c5": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "IF({e.group1.item1.c5}-{e.group1.item2.c5}-{e.group1.item3.c5}+{e.group1.item4.c5}<=0,0,{e.group1.item1.c5}-{e.group1.item2.c5}-{e.group1.item3.c5}+{e.group1.item4.c5})"
+                      }
+                    }
+                  },
+                  "id": "item5"
+                },
+                {
+                  "values": {
+                    "c1": "VI",
+                    "c2": "Tổng số tiết vượt giờ đề nghị thanh toán (Là số tiết định mức trừ đi số tiết được giảm trừ)",
+                    "c3": "Tổng số tiết vượt giờ đề nghị thanh toán (Là số tiết định mức trừ đi số tiết được giảm trừ)",
+                    "c4": "Tổng số tiết vượt giờ đề nghị thanh toán (Là số tiết định mức trừ đi số tiết được giảm trừ)",
+                    "c5": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "IF({e.group1.item5.c5}>{e.group1.item2.c5}-{e.group1.item4.c5},{e.group1.item2.c5}-{e.group1.item4.c5},{e.group1.item5.c5})"
+                      }
+                    }
+                  },
+                  "id": "item6"
+                },
+                {
+                  "values": {},
+                  "id": "item7"
+                }
+              ],
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "e.block1"
+        }
+      ],
+      "id": "e"
+    },
+    {
+      "title": "F. TỔNG SỐ TIẾT THỐNG KÊ THEO TỪNG HỆ ĐÀO TẠO",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "key": "c1",
+              "name": "TT"
+            },
+            {
+              "key": "c2",
+              "name": "Tên chuyên ngành\n(giảng dạy, coi chấm thi, ĐATN)"
+            },
+            {
+              "key": "c3",
+              "name": "Số tiết thực hiện HK 1 (theo quy chuẩn)"
+            },
+            {
+              "key": "c4",
+              "name": "Số tiết thực hiện HK 2 (theo quy chuẩn)"
+            },
+            {
+              "key": "c5",
+              "name": "Hướng dẫn ĐATN"
+            },
+            {
+              "key": "c6",
+              "name": "Tham quan tực tế"
+            },
+            {
+              "key": "c7",
+              "name": "Tổng số tiết cả năm"
+            }
+          ],
+          "groups": [
+            {
+              "title": "",
+              "items": [
+                {
+                  "values": {
+                    "c1": 1,
+                    "c2": "Việt Nam",
+                    "c3": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUMIF({a1.group1.item1.c5}:{a1.group2.total.c5},{f.group1.item1.c2},{a1.group1.item1.c7}:{a1.group2.total.c7})+SUMIF({a2.group1.item1.c5}:{a2.group2.total.c5},{f.group1.item1.c2},{a2.group1.item1.c7}:{a2.group2.total.c7})"
+                      }
+                    },
+                    "c4": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUMIF({a1.group3.item1.c5}:{a1.group4.item2.c5},{f.group1.item1.c2},{a1.group3.item1.c7}:{a1.group4.item2.c7})+SUMIF({a2.group3.item1.c5}:{a2.group4.total.c5},{f.group1.item1.c2},{a2.group3.item1.c7}:{a2.group4.total.c7})"
+                      }
+                    },
+                    "c5": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "{b1.group1.total.c7}"
+                      }
+                    },
+                    "c6": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "{c1.group1.total.c7}"
+                      }
+                    },
+                    "c7": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUM({f.group1.item1.c3}:{f.group1.item1.c6})"
+                      }
+                    }
+                  },
+                  "id": "item1"
+                },
+                {
+                  "values": {
+                    "c1": 2,
+                    "c2": "Lào",
+                    "c3": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUMIF({a1.group1.item1.c5}:{a1.group2.total.c5},{f.group1.item2.c2},{a1.group1.item1.c7}:{a1.group2.total.c7})+SUMIF({a2.group1.item1.c5}:{a2.group2.total.c5},{f.group1.item2.c2},{a2.group1.item1.c7}:{a2.group2.total.c7})"
+                      }
+                    },
+                    "c4": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUMIF({a1.group3.item1.c5}:{a1.group4.item2.c5},{f.group1.item2.c2},{a1.group3.item1.c7}:{a1.group4.item2.c7})+SUMIF({a2.group3.item1.c5}:{a2.group4.total.c5},{f.group1.item2.c2},{a2.group3.item1.c7}:{a2.group4.total.c7})"
+                      }
+                    },
+                    "c5": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "{b2.group1.total.c7}"
+                      }
+                    },
+                    "c6": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "{c2.group1.total.c7}"
+                      }
+                    },
+                    "c7": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUM({f.group1.item2.c3}:{f.group1.item2.c6})"
+                      }
+                    }
+                  },
+                  "id": "item2"
+                },
+                {
+                  "values": {
+                    "c1": 3,
+                    "c2": "Cuba",
+                    "c3": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUMIF({a1.group1.item1.c5}:{a1.group2.total.c5},{f.group1.item3.c2},{a1.group1.item1.c7}:{a1.group2.total.c7})+SUMIF({a2.group1.item1.c5}:{a2.group2.total.c5},{f.group1.item3.c2},{a2.group1.item1.c7}:{a2.group2.total.c7})"
+                      }
+                    },
+                    "c4": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUMIF({a1.group3.item1.c5}:{a1.group4.item2.c5},{f.group1.item3.c2},{a1.group3.item1.c7}:{a1.group4.item2.c7})+SUMIF({a2.group3.item1.c5}:{a2.group4.total.c5},{f.group1.item3.c2},{a2.group3.item1.c7}:{a2.group4.total.c7})"
+                      }
+                    },
+                    "c5": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "{c3.group1.total.c7}"
+                      }
+                    },
+                    "c6": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "{c3.group1.total.c7}"
+                      }
+                    },
+                    "c7": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUM({f.group1.item3.c3}:{f.group1.item3.c6})"
+                      }
+                    }
+                  },
+                  "id": "item3"
+                },
+                {
+                  "values": {
+                    "c1": 4,
+                    "c2": "Campuchia",
+                    "c3": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUMIF({a1.group1.item1.c5}:{a1.group2.total.c5},{f.group1.item4.c2},{a1.group1.item1.c7}:{a1.group2.total.c7})+SUMIF({a2.group1.item1.c5}:{a2.group2.total.c5},{f.group1.item4.c2},{a2.group1.item1.c7}:{a2.group2.total.c7})"
+                      }
+                    },
+                    "c4": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUMIF({a1.group3.item1.c5}:{a1.group4.item2.c5},{f.group1.item4.c2},{a1.group3.item1.c7}:{a1.group4.item2.c7})+SUMIF({a2.group3.item1.c5}:{a2.group4.total.c5},{f.group1.item4.c2},{a2.group3.item1.c7}:{a2.group4.total.c7})"
+                      }
+                    },
+                    "c5": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "{b4.group1.total.c7}"
+                      }
+                    },
+                    "c6": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "{c4.group1.total.c7}"
+                      }
+                    },
+                    "c7": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUM({f.group1.item4.c3}:{f.group1.item4.c6})"
+                      }
+                    }
+                  },
+                  "id": "item4"
+                },
+                {
+                  "values": {
+                    "c1": 5,
+                    "c2": "Đóng HP",
+                    "c3": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUMIF({a1.group1.item1.c5}:{a1.group2.total.c5},{f.group1.item5.c2},{a1.group1.item1.c7}:{a1.group2.total.c7})+SUMIF({a2.group1.item1.c5}:{a2.group2.total.c5},{f.group1.item5.c2},{a2.group1.item1.c7}:{a2.group2.total.c7})"
+                      }
+                    },
+                    "c4": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUMIF({a1.group3.item1.c5}:{a1.group4.item2.c5},{f.group1.item5.c2},{a1.group3.item1.c7}:{a1.group4.item2.c7})+SUMIF({a2.group3.item1.c5}:{a2.group4.total.c5},{f.group1.item5.c2},{a2.group3.item1.c7}:{a2.group4.total.c7})"
+                      }
+                    },
+                    "c5": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "{b5.group1.total.c7}"
+                      }
+                    },
+                    "c6": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "{c5.group1.total.c7}"
+                      }
+                    },
+                    "c7": {
+                      "formula": {
+                        "type": "excel",
+                        "template": "SUM({f.group1.item5.c3}:{f.group1.item5.c6})"
+                      }
+                    }
+                  },
+                  "id": "item5"
+                },
+                {
+                  "values": {},
+                  "id": "item6"
+                },
+                {
+                  "values": {
+                    "c1": "CHỦ NHIỆM KHOA\n(ký, ghi rõ họ tên)",
+                    "c2": "CHỦ NHIỆM KHOA\n(ký, ghi rõ họ tên)",
+                    "c3": "CHỦ NHIỆM KHOA\n(ký, ghi rõ họ tên)",
+                    "c4": "NGƯỜI KÊ KHAI\n(ký, ghi rõ họ tên)",
+                    "c5": "NGƯỜI KÊ KHAI\n(ký, ghi rõ họ tên)",
+                    "c6": "NGƯỜI KÊ KHAI\n(ký, ghi rõ họ tên)"
+                  },
+                  "id": "item7"
+                },
+                {
+                  "values": {},
+                  "id": "item8"
+                },
+                {
+                  "values": {},
+                  "id": "item9"
+                },
+                {
+                  "values": {},
+                  "id": "item10"
+                },
+                {
+                  "values": {},
+                  "id": "item11"
+                },
+                {
+                  "values": {},
+                  "id": "item12"
+                },
+                {
+                  "values": {
+                    "c1": "Phạm Văn Hưởng",
+                    "c2": "Phạm Văn Hưởng",
+                    "c3": "Phạm Văn Hưởng",
+                    "c4": "Lê Đức Thuận",
+                    "c5": "Lê Đức Thuận",
+                    "c6": "Lê Đức Thuận"
+                  },
+                  "id": "item13"
+                }
+              ],
+              "total": {
+                "label": "Tổng:",
+                "values": {
+                  "c1": "Tổng:",
+                  "c2": "Tổng:",
+                  "c3": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c3"
+                    }
+                  },
+                  "c4": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c4"
+                    }
+                  },
+                  "c5": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c5"
+                    }
+                  },
+                  "c6": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c6"
+                    }
+                  },
+                  "c7": {
+                    "formula": {
+                      "type": "sumItems",
+                      "column": "c7"
+                    }
+                  }
+                },
+                "id": "total"
+              },
+              "id": "group1"
+            }
+          ],
+          "summaryRows": [],
+          "id": "f.block1"
+        }
+      ],
+      "id": "f"
+    }
+  ]
+}

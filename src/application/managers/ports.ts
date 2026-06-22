@@ -1,6 +1,7 @@
 import type { RenderPlan, RenderOperation } from '../planner/render-plan.js';
 import type { CellAddress, RangeAddress } from '../../shared/address/address.js';
 import type { WorkbookTemplateSource } from '../../core/template/workbook-template-source.js';
+import type { WorkbookRenderConfig } from '../engine/types.js';
 
 export type { CellTemplateSource, RowTemplateSource, WorkbookTemplateSource, WorksheetTemplateSource } from '../../core/template/workbook-template-source.js';
 
@@ -8,6 +9,7 @@ export type TemplateInput = Buffer | Uint8Array | ArrayBuffer | string;
 
 export interface WorkbookRenderer {
   load(input: TemplateInput): Promise<WorkbookTemplateSource>;
+  prepare?(config: WorkbookRenderConfig): Promise<WorkbookTemplateSource>;
   apply(plan: RenderPlan): Promise<void>;
   write(): Promise<Uint8Array>;
 }

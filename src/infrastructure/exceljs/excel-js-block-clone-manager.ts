@@ -23,8 +23,10 @@ export class ExcelJsBlockCloneManager {
     const images = this.collectSourceImages(operation.sourceRange);
     const mergeManager = new ExcelJsMergeManager(this.worksheet.workbook);
     const mergeRanges = await mergeManager.cloneForOperation(operation);
+    const shiftedRowStyles = this.snapshotShiftedRowStyles(operation.targetTopLeft.row);
 
     this.worksheet.spliceRows(operation.targetTopLeft.row, 0, ...Array.from({ length: rowsToInsert }, () => []));
+    this.restoreShiftedRowStyles(shiftedRowStyles, rowsToInsert);
 
     const styleManager = new ExcelJsStyleCloneManager(this.worksheet.workbook);
     await this.cloneRows(operation, styleManager);
@@ -160,6 +162,76 @@ export class ExcelJsBlockCloneManager {
     return sourceRange.end.row - sourceRange.start.row + 1;
   }
 
+  private snapshotShiftedRowStyles(startRow: number): readonly RowStyleSnapshot[] {
+    const snapshots: RowStyleSnapshot[] = [];
+    for (let rowNumber = startRow; rowNumber <= this.worksheet.rowCount; rowNumber += 1) {
+      const row = this.worksheet.getRow(rowNumber);
+      const cells: CellStyleSnapshot[] = [];
+      row.eachCell({ includeEmpty: true }, (cell, columnNumber) => {
+        if (this.hasStyle(cell.style)) {
+          cells.push({
+            column: columnNumber,
+            style: this.deepClone(cell.style),
+          });
+        }
+      });
+
+      snapshots.push({
+        row: rowNumber,
+        ...(row.height !== undefined ? { height: row.height } : {}),
+        style: this.deepClone(this.pickStyleFields(row as Partial<ExcelJS.Style>)),
+        cells,
+      });
+    }
+
+    return snapshots;
+  }
+
+  private restoreShiftedRowStyles(snapshots: readonly RowStyleSnapshot[], rowDelta: number): void {
+    for (const snapshot of snapshots) {
+      const targetRowNumber = snapshot.row + rowDelta;
+      if (targetRowNumber < 1) {
+        continue;
+      }
+
+      const row = this.worksheet.getRow(targetRowNumber);
+      this.applyStyleFields(row as Partial<ExcelJS.Style>, snapshot.style);
+      if (snapshot.height !== undefined) {
+        row.height = snapshot.height;
+      }
+
+      for (const cellSnapshot of snapshot.cells) {
+        row.getCell(cellSnapshot.column).style = this.deepClone(cellSnapshot.style);
+      }
+    }
+  }
+
+  private pickStyleFields(style: Partial<ExcelJS.Style>): Partial<ExcelJS.Style> {
+    const picked: Partial<ExcelJS.Style> = {};
+    for (const key of STYLE_KEYS) {
+      if (style[key] !== undefined) {
+        picked[key] = this.deepClone(style[key]) as never;
+      }
+    }
+
+    return picked;
+  }
+
+  private applyStyleFields(target: Partial<ExcelJS.Style>, source: Partial<ExcelJS.Style>): void {
+    for (const key of STYLE_KEYS) {
+      if (source[key] === undefined) {
+        delete target[key];
+        continue;
+      }
+
+      target[key] = this.deepClone(source[key]) as never;
+    }
+  }
+
+  private hasStyle(style: Partial<ExcelJS.Style> | undefined): boolean {
+    return !!style && STYLE_KEYS.some((key) => style[key] !== undefined);
+  }
+
   private shiftFormulaValue(
     value: ExcelJS.CellValue,
     rowDelta: number,
@@ -197,6 +269,18 @@ interface CellSnapshot {
   readonly value: ExcelJS.CellValue;
 }
 
+interface RowStyleSnapshot {
+  readonly row: number;
+  readonly height?: number;
+  readonly style: Partial<ExcelJS.Style>;
+  readonly cells: readonly CellStyleSnapshot[];
+}
+
+interface CellStyleSnapshot {
+  readonly column: number;
+  readonly style: Partial<ExcelJS.Style>;
+}
+
 interface ImageSnapshot {
   readonly imageId: number;
   readonly range: ExcelJS.ImageRange;
@@ -211,3 +295,5 @@ interface WorksheetImage {
   readonly imageId: string;
   readonly range: ExcelJS.ImageRange;
 }
+
+const STYLE_KEYS = ['numFmt', 'font', 'fill', 'border', 'alignment', 'protection'] as const;

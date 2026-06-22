@@ -107,6 +107,68 @@ matrix.getCell('B2').style = headerStyle();
 matrix.getCell('A3').style = valueStyle();
 matrix.getCell('B3').style = valueStyle();
 
+const dynamicHeader = workbook.addWorksheet('DynamicHeader');
+dynamicHeader.columns = [
+  { width: 20 },
+  { width: 12 },
+  { width: 12 },
+  { width: 12 },
+  { width: 12 },
+  { width: 12 },
+  { width: 12 },
+  { width: 12 },
+  { width: 12 },
+];
+dynamicHeader.mergeCells('A1:I1');
+dynamicHeader.getCell('A1').value = 'Dynamic Grouped Header Test';
+dynamicHeader.getCell('A1').style = titleStyle();
+dynamicHeader.mergeCells('A2:A3');
+dynamicHeader.getCell('A2').value = 'Category';
+dynamicHeader.getCell('B2').value = '{{#each-col groups span=size reserve=8}}{{name}}{{/each-col}}';
+dynamicHeader.getCell('B3').value = '{{#each-col groupCols reserve=8}}{{col}}{{/each-col}}';
+dynamicHeader.getCell('A4').value = '{{#block rows}}';
+dynamicHeader.getCell('A5').value = '{{label}}';
+dynamicHeader.getCell('B5').value = '{{#each-col rowCols reserve=8}}{{value}}{{/each-col}}';
+dynamicHeader.getCell('A6').value = '{{/block}}';
+for (const cellAddress of ['A2', 'B2', 'B3', 'A5', 'B5']) {
+  dynamicHeader.getCell(cellAddress).style = headerStyle();
+}
+
+const departmentReport = workbook.addWorksheet('DepartmentReport');
+departmentReport.columns = [
+  { width: 8 },
+  { width: 26 },
+  { width: 12 },
+  { width: 12 },
+  { width: 12 },
+  { width: 12 },
+  { width: 12 },
+  { width: 12 },
+  { width: 12 },
+  { width: 12 },
+];
+departmentReport.mergeCells('A1:J1');
+departmentReport.getCell('A1').value = 'Department Overtime Report';
+departmentReport.getCell('A1').style = titleStyle();
+departmentReport.mergeCells('A2:A3');
+departmentReport.getCell('A2').value = 'No.';
+departmentReport.mergeCells('B2:B3');
+departmentReport.getCell('B2').value = 'Lecturer';
+departmentReport.getCell('C2').value = '{{#each-col semesterGroups span=colCount reserve=8}}{{name}}{{/each-col}}';
+departmentReport.getCell('C3').value = '{{#each-col semesterColumns reserve=8}}{{name}}{{/each-col}}';
+departmentReport.getCell('A4').value = '{{#block departments}}';
+departmentReport.mergeCells('A5:J5');
+departmentReport.getCell('A5').value = '{{index}}. {{name}}';
+departmentReport.getCell('A6').value = '{{#block lecturers}}';
+departmentReport.getCell('A7').value = '{{index}}';
+departmentReport.getCell('B7').value = '{{name}}';
+departmentReport.getCell('C7').value = '{{#each-col values reserve=8}}{{value}}{{/each-col}}';
+departmentReport.getCell('A8').value = '{{/block}}';
+departmentReport.getCell('A9').value = '{{/block}}';
+for (const cellAddress of ['A2', 'B2', 'C2', 'C3', 'A5', 'A7', 'B7', 'C7']) {
+  departmentReport.getCell(cellAddress).style = headerStyle();
+}
+
 const contracts = workbook.addWorksheet('Contracts');
 contracts.columns = [
   { width: 20 },

@@ -48,6 +48,115 @@
       "students": [{ "name": "Pham Van D" }]
     }
   ],
+  "groups": [
+    { "name": "Nhóm A", "size": 3 },
+    { "name": "Nhóm B", "size": 2 },
+    { "name": "Nhóm C", "size": 3 }
+  ],
+  "groupCols": [
+    { "col": "A1" },
+    { "col": "A2" },
+    { "col": "A3" },
+    { "col": "B1" },
+    { "col": "B2" },
+    { "col": "C1" },
+    { "col": "C2" },
+    { "col": "C3" }
+  ],
+  "rows": [
+    {
+      "label": "Row 1",
+      "rowCols": [
+        { "value": 1 },
+        { "value": 2 },
+        { "value": 3 },
+        { "value": 4 },
+        { "value": 5 },
+        { "value": 6 },
+        { "value": 7 },
+        { "value": 8 }
+      ]
+    },
+    {
+      "label": "Row 2",
+      "rowCols": [
+        { "value": 9 },
+        { "value": 10 },
+        { "value": 11 },
+        { "value": 12 },
+        { "value": 13 },
+        { "value": 14 },
+        { "value": 15 },
+        { "value": 16 }
+      ]
+    }
+  ],
+  "semesterGroups": [
+    { "name": "Học kỳ I", "colCount": 3 },
+    { "name": "Học kỳ II", "colCount": 3 },
+    { "name": "Cả năm", "colCount": 2 }
+  ],
+  "semesterColumns": [
+    { "name": "VN" },
+    { "name": "Lào" },
+    { "name": "Tổng" },
+    { "name": "VN" },
+    { "name": "Lào" },
+    { "name": "Tổng" },
+    { "name": "Tổng" },
+    { "name": "Thanh toán" }
+  ],
+  "departments": [
+    {
+      "name": "KHOA CNTT",
+      "lecturers": [
+        {
+          "name": "Nguyen Van A",
+          "values": [
+            { "value": 10 },
+            { "value": 20 },
+            { "value": 30 },
+            { "value": 15 },
+            { "value": 25 },
+            { "value": 40 },
+            { "value": 70 },
+            { "value": 300 }
+          ]
+        },
+        {
+          "name": "Tran Thi B",
+          "values": [
+            { "value": 11 },
+            { "value": 21 },
+            { "value": 32 },
+            { "value": 16 },
+            { "value": 26 },
+            { "value": 42 },
+            { "value": 74 },
+            { "value": 320 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "KHOA MAT MA",
+      "lecturers": [
+        {
+          "name": "Le Van C",
+          "values": [
+            { "value": 12 },
+            { "value": 22 },
+            { "value": 34 },
+            { "value": 17 },
+            { "value": 27 },
+            { "value": 44 },
+            { "value": 78 },
+            { "value": 340 }
+          ]
+        }
+      ]
+    }
+  ],
   "contracts": [
     {
       "code": "C-001",

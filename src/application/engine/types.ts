@@ -9,8 +9,20 @@ export interface EngineRenderOptions {
   readonly recalculateFormulas?: boolean;
   readonly missingValue?: 'empty-string' | 'null' | 'throw';
   readonly renderer?: WorkbookRenderer;
+  readonly workbook?: WorkbookRenderConfig;
   readonly limits?: RenderLimits;
   readonly assetResolver?: AssetResolverOptions;
+}
+
+export interface WorkbookRenderConfig {
+  readonly worksheets?: readonly WorksheetRenderConfig[];
+}
+
+export interface WorksheetRenderConfig {
+  readonly sourceName: string;
+  readonly name: string;
+  readonly dataPath?: string;
+  readonly deleteSource?: boolean;
 }
 
 export interface RenderLimits {

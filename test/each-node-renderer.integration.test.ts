@@ -44,3 +44,41 @@ test('EachNode render workbook rows with loop metadata and inline nested loops',
   assert.equal(rendered.getCell('A2').value, '1:B:false:true');
   assert.equal(renderedInline.getCell('C5').value, 'Nested: 0[0.0:C;0.1:D;]1[1.0:E;]');
 });
+
+test('EachNode clone đầy đủ style từ ô template sang các hàng được render', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'excel-template-engine-each-node-full-style-'));
+  const templatePath = join(dir, 'template.xlsx');
+
+  const template = new ExcelJS.Workbook();
+  const worksheet = template.addWorksheet('Rows');
+  worksheet.getCell('B2').value = '{{#each students}}{{score}}{{/each}}';
+  worksheet.getCell('B2').style = {
+    numFmt: '0.00',
+    font: { name: 'Arial', italic: true, color: { argb: 'FF0F766E' } },
+    fill: { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFCCFBF1' } },
+    border: {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'medium' },
+      right: { style: 'thin' },
+    },
+    alignment: { horizontal: 'right', vertical: 'middle' },
+  };
+  await template.xlsx.writeFile(templatePath);
+
+  const result = await new ExcelTemplateEngine().render(templatePath, {
+    students: [
+      { score: 8.5 },
+      { score: 9.25 },
+    ],
+  });
+
+  const output = new ExcelJS.Workbook();
+  await output.xlsx.load(Buffer.from(result.output) as unknown as ExcelJsLoadInput);
+  const rendered = output.getWorksheet('Rows');
+  assert.ok(rendered);
+
+  assert.equal(rendered.getCell('B2').value, '8.5');
+  assert.equal(rendered.getCell('B3').value, '9.25');
+  assert.deepEqual(rendered.getCell('B3').style, rendered.getCell('B2').style);
+});

@@ -19,6 +19,7 @@ export interface RowTemplateSource {
 
 export interface CellTemplateSource {
   readonly address: CellAddress;
+  readonly sourceRange?: RangeAddress;
   readonly value: unknown;
   readonly formula?: string;
   readonly styleRef?: string;

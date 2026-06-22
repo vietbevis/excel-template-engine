@@ -12,6 +12,7 @@ export type RenderOperation =
   | CloneBlockOperation
   | InsertImageOperation
   | DeleteRowsOperation
+  | CleanupTemplateMarkersOperation
   | ApplyMergeOperation
   | ShiftFormulaOperation
   | ClearFormulaCacheOperation;
@@ -25,6 +26,27 @@ export interface SetCellValueOperation extends BaseOperation {
   readonly type: 'SetCellValue';
   readonly cell: CellAddress;
   readonly value: unknown;
+  readonly styleSource?: CellAddress;
+  readonly format?: CellFormat;
+  readonly dataValidation?: CellDataValidation;
+}
+
+export interface CellFormat {
+  readonly wrapText?: boolean;
+  readonly numFmt?: string;
+}
+
+export interface CellDataValidation {
+  readonly type: 'choice';
+  readonly values?: readonly (string | number | boolean)[];
+  readonly formula?: string;
+  readonly allowBlank?: boolean;
+  readonly showErrorMessage?: boolean;
+  readonly errorTitle?: string;
+  readonly error?: string;
+  readonly showInputMessage?: boolean;
+  readonly promptTitle?: string;
+  readonly prompt?: string;
 }
 
 export interface CloneRowOperation extends BaseOperation {
@@ -61,6 +83,10 @@ export interface DeleteRowsOperation extends BaseOperation {
   readonly type: 'DeleteRows';
   readonly startRow: number;
   readonly count: number;
+}
+
+export interface CleanupTemplateMarkersOperation extends BaseOperation {
+  readonly type: 'CleanupTemplateMarkers';
 }
 
 export interface ApplyMergeOperation extends BaseOperation {

@@ -92,6 +92,25 @@ JSON:
 - Width và style của cột template sẽ được clone.
 - Merge và formula liên quan sẽ được manager xử lý.
 
+Header nhóm động có thể dùng `span` để merge ngang theo field trên từng item:
+
+```text
+{{#each-col groups span=size}}{{name}}{{/each-col}}
+```
+
+Và dùng thêm `rowspan` khi cell header cần merge dọc:
+
+```text
+{{#each-col groups span=size rowspan=2}}{{name}}{{/each-col}}
+```
+
+Khi template đã dựng sẵn vùng cột cho báo cáo thật, dùng `reserve` để điền vào vùng đó thay vì clone thêm cột:
+
+```text
+{{#each-col semesterGroups span=colCount rowspan=2 reserve=31}}{{name}}{{/each-col}}
+{{#each-col semesterColumns reserve=31}}{{name}}{{/each-col}}
+```
+
 ## 5. Block
 
 Block dùng khi cần clone nhiều dòng/cột cùng lúc:

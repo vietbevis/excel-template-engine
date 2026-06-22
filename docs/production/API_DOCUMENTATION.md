@@ -200,6 +200,16 @@ Column loop:
 {{#each-col subjects}}{{name}}{{/each-col}}
 ```
 
+Dynamic grouped column header:
+
+```text
+{{#each-col groups span=size}}{{name}}{{/each-col}}
+{{#each-col groups span=size rowspan=2}}{{name}}{{/each-col}}
+{{#each-col groups span=size rowspan=2 reserve=31}}{{name}}{{/each-col}}
+```
+
+`span` reads an integer field from each item and merges the rendered cell horizontally by that number of columns. Missing/null `span` falls back to `1`; `0` or negative spans skip the item. `rowspan` is an integer literal for vertical merge height and defaults to `1`. `reserve` is an integer literal for templates that already contain a reserved dynamic column area; the renderer fills the reserved columns and only clones more columns if the rendered width exceeds the reserve.
+
 Grid:
 
 ```text

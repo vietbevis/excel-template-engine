@@ -30,6 +30,7 @@ export class TemplateParser {
           cells: row.cells.map((cell) => ({
             kind: 'CellAST',
             address: cell.address,
+            ...(cell.sourceRange ? { sourceRange: cell.sourceRange } : {}),
             nodes: typeof cell.value === 'string' ? this.parseCell(cell.value) : [],
             rawValue: cell.value,
           })),
@@ -133,26 +134,27 @@ export class TemplateParser {
 
   private parseControl(expression: string): ParsedControl | undefined {
     const [keyword, ...rest] = expression.split(/\s+/);
-    const path = rest.join(' ').trim();
+    const rawPath = rest.join(' ').trim();
 
     if (keyword === '#each') {
-      return { kind: 'each', path, closingTag: 'each' };
+      return { kind: 'each', path: rawPath, closingTag: 'each' };
     }
 
     if (keyword === '#each-col') {
-      return { kind: 'each-col', path, closingTag: 'each-col' };
+      const parsed = this.parsePathWithAttributes(rawPath);
+      return { kind: 'each-col', path: parsed.path, attributes: parsed.attributes, closingTag: 'each-col' };
     }
 
     if (keyword === '#block') {
-      return { kind: 'block', path, closingTag: 'block' };
+      return { kind: 'block', path: rawPath, closingTag: 'block' };
     }
 
     if (keyword === '#grid') {
-      return { kind: 'grid', path, closingTag: 'grid' };
+      return { kind: 'grid', path: rawPath, closingTag: 'grid' };
     }
 
     if (keyword === '#if') {
-      return { kind: 'if', path, closingTag: 'if' };
+      return { kind: 'if', path: rawPath, closingTag: 'if' };
     }
 
     return undefined;
@@ -184,6 +186,10 @@ export class TemplateParser {
         kind: 'EachColumnNode',
         id: this.createId('each-col', start),
         path: control.path,
+        ...(control.attributes?.span ? { spanPath: control.attributes.span } : {}),
+        ...(control.attributes?.render ? { renderPath: control.attributes.render } : {}),
+        ...this.parseRowSpanAttribute(control.attributes?.rowspan),
+        ...this.parseReserveAttribute(control.attributes?.reserve),
         children,
         source: { start, end },
       };
@@ -259,6 +265,62 @@ export class TemplateParser {
     return node;
   }
 
+  private parsePathWithAttributes(input: string): { readonly path: string; readonly attributes: Readonly<Record<string, string>> } {
+    const tokens = input.split(/\s+/).filter(Boolean);
+    const path = tokens[0] ?? '';
+    const attributes: Record<string, string> = {};
+
+    for (const token of tokens.slice(1)) {
+      const equals = token.indexOf('=');
+      if (equals <= 0 || equals === token.length - 1) {
+        throw new Error(`Invalid each-col attribute: ${token}`);
+      }
+
+      const key = token.slice(0, equals).trim();
+      const value = token.slice(equals + 1).trim();
+      if (key !== 'span' && key !== 'rowspan' && key !== 'reserve' && key !== 'render') {
+        throw new Error(`Unsupported each-col attribute: ${key}`);
+      }
+
+      attributes[key] = value;
+    }
+
+    return { path, attributes };
+  }
+
+  private parsePositiveInteger(value: string, name: string): number {
+    const parsed = Number(value);
+    if (!Number.isInteger(parsed) || parsed < 1) {
+      throw new Error(`${name} must be an integer greater than or equal to 1.`);
+    }
+
+    return parsed;
+  }
+
+  private parseRowSpanAttribute(value: string | undefined): Pick<EachColumnNode, 'rowSpan' | 'rowSpanPath'> {
+    if (!value) {
+      return {};
+    }
+
+    if (/^\d+$/.test(value)) {
+      return { rowSpan: this.parsePositiveInteger(value, 'rowspan') };
+    }
+
+    return { rowSpanPath: value };
+  }
+
+  private parseReserveAttribute(value: string | undefined): Pick<EachColumnNode, 'reservedColumns' | 'reservedColumnsPath'> {
+    if (!value) {
+      return {};
+    }
+
+    if (/^\d+$/.test(value)) {
+      return { reservedColumns: this.parsePositiveInteger(value, 'reserve') };
+    }
+
+    return { reservedColumnsPath: value };
+  }
+
   private parseHelper(expression: string, start: number, end: number): HelperNode | undefined {
     const openParen = expression.indexOf('(');
     const closeParen = expression.endsWith(')') ? expression.length - 1 : -1;
@@ -323,5 +385,6 @@ interface ParseResult {
 interface ParsedControl {
   readonly kind: 'each' | 'each-col' | 'block' | 'grid' | 'if';
   readonly path: string;
+  readonly attributes?: Readonly<Record<string, string>>;
   readonly closingTag: string;
 }

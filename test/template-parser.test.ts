@@ -40,11 +40,21 @@ test('TemplateParser parse each lồng if', () => {
 test('TemplateParser parse each-col, block và image node', () => {
   const parser = new TemplateParser();
   const columnNodes = parser.parseCell('{{#each-col subjects}}{{name}}{{/each-col}}');
+  const spannedColumnNodes = parser.parseCell('{{#each-col groups span=size rowspan=2 reserve=8}}{{name}}{{/each-col}}');
+  const dynamicRowspanNodes = parser.parseCell('{{#each-col groups span=size rowspan=rowSpan render=renderHeader reserve=columnCount}}{{name}}{{/each-col}}');
   const blockNodes = parser.parseCell('{{#block contracts}}{{code}}{{/block}}');
   const imageNodes = parser.parseCell('{{image avatar}}');
 
   assert.equal(columnNodes[0]?.kind, 'EachColumnNode');
   assert.equal(columnNodes[0]?.kind === 'EachColumnNode' ? columnNodes[0].path : undefined, 'subjects');
+  assert.equal(spannedColumnNodes[0]?.kind, 'EachColumnNode');
+  assert.equal(spannedColumnNodes[0]?.kind === 'EachColumnNode' ? spannedColumnNodes[0].path : undefined, 'groups');
+  assert.equal(spannedColumnNodes[0]?.kind === 'EachColumnNode' ? spannedColumnNodes[0].spanPath : undefined, 'size');
+  assert.equal(spannedColumnNodes[0]?.kind === 'EachColumnNode' ? spannedColumnNodes[0].rowSpan : undefined, 2);
+  assert.equal(spannedColumnNodes[0]?.kind === 'EachColumnNode' ? spannedColumnNodes[0].reservedColumns : undefined, 8);
+  assert.equal(dynamicRowspanNodes[0]?.kind === 'EachColumnNode' ? dynamicRowspanNodes[0].rowSpanPath : undefined, 'rowSpan');
+  assert.equal(dynamicRowspanNodes[0]?.kind === 'EachColumnNode' ? dynamicRowspanNodes[0].renderPath : undefined, 'renderHeader');
+  assert.equal(dynamicRowspanNodes[0]?.kind === 'EachColumnNode' ? dynamicRowspanNodes[0].reservedColumnsPath : undefined, 'columnCount');
   assert.equal(blockNodes[0]?.kind, 'BlockNode');
   assert.equal(blockNodes[0]?.kind === 'BlockNode' ? blockNodes[0].path : undefined, 'contracts');
   assert.equal(imageNodes[0]?.kind, 'ImageNode');

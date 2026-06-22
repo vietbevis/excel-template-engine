@@ -1,4 +1,22 @@
 export { ExcelTemplateEngine } from './application/engine/excel-template-engine.js';
+export {
+  ColumnTreeCompiler,
+  FormulaTemplateCompiler,
+} from './application/data/column-tree-compiler.js';
+export type {
+  ColumnTreeBand,
+  ColumnTreeCellFormat,
+  ColumnTreeColumn,
+  ColumnTreeColumnDefinition,
+  ColumnTreeCompileOptions,
+  ColumnTreeCompileResult,
+  ColumnTreeFormula,
+  ColumnTreeGroup,
+  ColumnTreeHeaderValue,
+  ColumnTreeStaticColumn,
+  FormulaCompileContext,
+  SumSameKeyDerive,
+} from './application/data/column-tree-compiler.js';
 export type {
   EngineHelper,
   EngineRenderOptions,
@@ -8,6 +26,8 @@ export type {
   JsonObject,
   RenderLimits,
   TemplateInput,
+  WorkbookRenderConfig,
+  WorksheetRenderConfig,
 } from './application/engine/types.js';
 export type * from './core/ast/nodes.js';
 export { TemplateEngine } from './core/engine/template-engine.js';
